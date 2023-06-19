@@ -11,7 +11,6 @@ func _ready():
 	anim.play("walk")
 
 
-
 func _physics_process(_delta):
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction*movement_speed

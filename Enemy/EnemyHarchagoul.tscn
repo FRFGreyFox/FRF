@@ -82,7 +82,7 @@ collision_mask = 4
 position = Vector2(-149.625, 52.375)
 shape = SubResource("RectangleShape2D_b71vv")
 
-[node name="HitBox" parent="." instance=ExtResource("4_2i2p0")]
+[node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_2i2p0")]
 position = Vector2(162, -36)
 collision_layer = 2
 collision_mask = 2

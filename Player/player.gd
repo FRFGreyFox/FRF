@@ -26,8 +26,6 @@ func movement():
 			else:
 				sprite.frame += 1
 			walkTimer.start()
-	
-	
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
 	
