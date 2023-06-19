@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5yamm2dwtyn2"]
+
+[ext_resource type="Texture2D" uid="uid://ciu6hsih6jdm0" path="res://Sprite/sMap2.png" id="1_cwd4r"]
+[ext_resource type="PackedScene" uid="uid://4k1fyqp7ejc3" path="res://Player/player.tscn" id="2_j3nsf"]
+[ext_resource type="PackedScene" uid="uid://wy0k4ge7rfcc" path="res://Utility/enemy_spawner.tscn" id="3_ipr6t"]
+[ext_resource type="PackedScene" uid="uid://dpq5tvydnvgi6" path="res://Enemy/EnemyHarchagoul.tscn" id="4_0ojlo"]
+[ext_resource type="Script" path="res://Utility/Spawn_info.gd" id="5_5t1jq"]
+
+[sub_resource type="GDScript" id="GDScript_ef1up"]
+
+[sub_resource type="Resource" id="Resource_ph6sm"]
+script = ExtResource("5_5t1jq")
+time_start = 0
+time_end = 5
+enemy = ExtResource("4_0ojlo")
+enemy_number = 1
+enemy_spawn_delay = 0.0
+
+[sub_resource type="Resource" id="Resource_j285v"]
+script = ExtResource("5_5t1jq")
+time_start = 5
+time_end = 60
+enemy = ExtResource("4_0ojlo")
+enemy_number = 10
+enemy_spawn_delay = 0.0
+
+[node name="Endless" type="Node2D"]
+script = SubResource("GDScript_ef1up")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 3
+texture = ExtResource("1_cwd4r")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+
+[node name="player" parent="." instance=ExtResource("2_j3nsf")]
+position = Vector2(-13, -25)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_ipr6t")]
+spawns = Array[ExtResource("5_5t1jq")]([SubResource("Resource_ph6sm"), SubResource("Resource_j285v")])

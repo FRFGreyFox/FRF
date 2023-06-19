@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpq5tvydnvgi6"]
+
+[ext_resource type="Script" path="res://Enemy/EnemyHarchagoul.gd" id="1_rr8oh"]
+[ext_resource type="Texture2D" uid="uid://cdbgobbpn538e" path="res://Enemy/sEnemy_strip7.png" id="2_bjwhj"]
+[ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/hurt_box.tscn" id="3_k3yh6"]
+[ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/hit_box.tscn" id="4_2i2p0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8hit"]
+size = Vector2(41.5179, 30.1506)
+
+[sub_resource type="Animation" id="Animation_pbrob"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_p2was"]
+resource_name = "walk"
+length = 1.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_85n8h"]
+_data = {
+"RESET": SubResource("Animation_pbrob"),
+"walk": SubResource("Animation_p2was")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b71vv"]
+size = Vector2(57.25, 46.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g58os"]
+size = Vector2(66, 63)
+
+[node name="EnemyHarchagoul" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_rr8oh")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(2.99999, -6)
+scale = Vector2(3.3375, 3.125)
+texture = ExtResource("2_bjwhj")
+hframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(9, 8)
+rotation = -0.523598
+shape = SubResource("RectangleShape2D_p8hit")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_85n8h")
+}
+
+[node name="HurtBox" parent="." instance=ExtResource("3_k3yh6")]
+position = Vector2(159, -34)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(-149.625, 52.375)
+shape = SubResource("RectangleShape2D_b71vv")
+
+[node name="HitBox" parent="." instance=ExtResource("4_2i2p0")]
+position = Vector2(162, -36)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(-155, 51)
+shape = SubResource("RectangleShape2D_g58os")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]
