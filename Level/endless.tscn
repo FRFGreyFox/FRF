@@ -21,7 +21,7 @@ script = ExtResource("5_5t1jq")
 time_start = 5
 time_end = 60
 enemy = ExtResource("4_0ojlo")
-enemy_number = 0
+enemy_number = 10
 enemy_spawn_delay = 0.0
 
 [node name="Endless" type="Node2D"]
