@@ -13,6 +13,10 @@ height = 64.6936
 size = Vector2(53, 66)
 
 [node name="Player" type="CharacterBody2D"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r3jge"]
+radius = 1079.13
+
 motion_mode = 1
 script = ExtResource("1_872t5")
 
@@ -52,6 +56,29 @@ offset_right = -18.0
 offset_bottom = -40.0
 scale = Vector2(0.5, 0.5)
 
+[node name="attack" type="Node2D" parent="."]
+
+[node name="iceSpearTimer" type="Timer" parent="attack"]
+unique_name_in_owner = true
+wait_time = 1.5
+
+[node name="iceSpearAttackTimer" type="Timer" parent="attack/iceSpearTimer"]
+unique_name_in_owner = true
+wait_time = 0.075
+
+[node name="EnemyDetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
+position = Vector2(9, 17)
+shape = SubResource("CircleShape2D_r3jge")
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="attack/iceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
+[connection signal="timeout" from="attack/iceSpearTimer/iceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
+[connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 
 [editable path="HurtBox"]
