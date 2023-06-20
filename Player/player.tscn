@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://4k1fyqp7ejc3"]
+[gd_scene load_steps=7 format=3 uid="uid://4k1fyqp7ejc3"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_872t5"]
 [ext_resource type="Texture2D" uid="uid://c7vjhqstjpuuv" path="res://Player/sGreyFoxRunAnim6.png" id="2_t2071"]
 [ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/hurt_box.tscn" id="3_kesnf"]
+[ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar.tscn" id="4_hs8up"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_33yk3"]
 radius = 30.3412
 height = 64.6936
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1lno"]
-size = Vector2(66.5, 84)
+size = Vector2(53, 66)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_872t5")
 
@@ -25,6 +26,7 @@ frame = 5
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(7, 23)
 rotation = 0.523598
 shape = SubResource("CapsuleShape2D_33yk3")
@@ -35,13 +37,20 @@ wait_time = 0.2
 one_shot = true
 
 [node name="HurtBox" parent="." groups=["player"] instance=ExtResource("3_kesnf")]
-position = Vector2(159, -34)
+position = Vector2(7, 14)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-156, 45)
+position = Vector2(2, -7)
 shape = SubResource("RectangleShape2D_q1lno")
+
+[node name="HealthBar" parent="." instance=ExtResource("4_hs8up")]
+offset_left = -18.0
+offset_top = -40.0
+offset_right = -18.0
+offset_bottom = -40.0
+scale = Vector2(0.5, 0.5)
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
