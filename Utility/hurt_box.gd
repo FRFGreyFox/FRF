@@ -20,8 +20,7 @@ func _on_area_entered(area):
 				2: #DisableHitBox
 					if area.has_method("tempdisable"):
 						area.tempdisable()
-			var damage = area.damage
-			emit_signal("hurt",damage)
+			emit_signal("hurt",area.damage)
 
 
 func _on_timer_timeout():

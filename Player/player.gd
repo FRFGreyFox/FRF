@@ -1,10 +1,15 @@
 extends CharacterBody2D
 
 
-var movement_speed = 200
-var hp = 50
+@export var movement_speed = 200
+@export var max_hp = 50
+@export var hp_bar_fill_color = Color(0, 190, 0)
+
 @onready var sprite = $Sprite
 @onready var walkTimer = $walkTimer
+@onready var health_bar = $HealthBar
+
+var hp = 50
 
 func _physics_process(_delta):
 	movement()
@@ -26,13 +31,11 @@ func movement():
 			else:
 				sprite.frame += 1
 			walkTimer.start()
-	
-	
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
 	
-	
+func _process(delta):
+	self.health_bar.update_health_bar(self.hp)
 
 func _on_hurt_box_hurt(damage):
 	hp -= damage
-	print(hp)
