@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5yamm2dwtyn2"]
+
+[ext_resource type="Texture2D" uid="uid://ciu6hsih6jdm0" path="res://Sprite/sMap2.png" id="1_57emo"]
+[ext_resource type="PackedScene" uid="uid://wy0k4ge7rfcc" path="res://Utility/enemy_spawner.tscn" id="3_rvtc8"]
+[ext_resource type="PackedScene" uid="uid://dpq5tvydnvgi6" path="res://Enemy/EnemyHarchagoul.tscn" id="4_6mu46"]
+[ext_resource type="Script" path="res://Utility/Spawn_info.gd" id="5_j6rht"]
+
+[sub_resource type="Resource" id="Resource_6tn21"]
+script = ExtResource("5_j6rht")
+time_start = 0
+time_end = 5
+enemy = ExtResource("4_6mu46")
+enemy_number = 1
+enemy_spawn_delay = 0.0
+
+[node name="Endless" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 3
+texture = ExtResource("1_57emo")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_rvtc8")]
+spawns = Array[ExtResource("5_j6rht")]([SubResource("Resource_6tn21")])
+
+[node name="PlayersSpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(-150, 0)
+
+[node name="1" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(150, 0)
+
+[node name="Players" type="Node2D" parent="."]
