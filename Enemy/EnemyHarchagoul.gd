@@ -2,10 +2,15 @@ extends CharacterBody2D
 
 
 @export var movement_speed = 100.0
-@export var hp = 10
+@export var max_hp = 10
+@export var hp_bar_fill_color = Color(190, 0, 0)
+
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var sprite = $sprite
 @onready var anim = $AnimationPlayer
+@onready var health_bar = $HealthBar
+
+var hp = 10
 
 func _ready():
 	anim.play("walk")

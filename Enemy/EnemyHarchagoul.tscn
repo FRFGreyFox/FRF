@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpq5tvydnvgi6"]
+[gd_scene load_steps=12 format=3 uid="uid://dpq5tvydnvgi6"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyHarchagoul.gd" id="1_rr8oh"]
 [ext_resource type="Texture2D" uid="uid://cdbgobbpn538e" path="res://Enemy/sEnemy_strip7.png" id="2_bjwhj"]
 [ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/hurt_box.tscn" id="3_k3yh6"]
 [ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/hit_box.tscn" id="4_2i2p0"]
+[ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar.tscn" id="5_cddim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8hit"]
 size = Vector2(41.5179, 30.1506)
@@ -91,6 +92,13 @@ damage = 2
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(-155, 51)
 shape = SubResource("RectangleShape2D_g58os")
+
+[node name="HealthBar" parent="." instance=ExtResource("5_cddim")]
+offset_left = -11.0
+offset_top = -81.0
+offset_right = -11.0
+offset_bottom = -81.0
+scale = Vector2(0.6, 0.6)
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

@@ -4,6 +4,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dovmo"]
 bg_color = Color(0.6, 0.854902, 0.6, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="HealthBar" type="Control"]
 z_index = 1
@@ -18,6 +22,7 @@ offset_bottom = -538.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e63ir")
+color = Color(0, 0.733333, 0, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0
