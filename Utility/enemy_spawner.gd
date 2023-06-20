@@ -2,14 +2,9 @@ extends Node2D
 
 @export var spawns: Array[Spawn_info] = []
 
-@onready var player = get_tree().get_first_node_in_group("player")
-
 var time = 0
 
 signal changetime(time)
-
-func _ready():
-	connect("changetime",Callable(player,"change_time"))
 
 func _on_timer_timeout():
 	time += 1
@@ -29,10 +24,12 @@ func _on_timer_timeout():
 					counter += 1
 
 
-func get_random_position(up = true, down = true, left = true, right = true):
+func get_random_position():
 	var viewport_size = get_viewport_rect().size * randf_range(1.1, 1.4)
-	var min_x = player.global_position.x - viewport_size.x / 2
-	var min_y = player.global_position.y - viewport_size.y / 2
+	# var min_x = player.global_position.x - viewport_size.x / 2
+	# var min_y = player.global_position.y - viewport_size.y / 2
+	var min_x = 0
+	var min_y = 0
 	match randi_range(1,4):
 		1:
 			return Vector2(randf_range(min_x, min_x + viewport_size.x), min_y)
