@@ -25,6 +25,8 @@ var player_name = "Pleyer"
 var players = {}
 var players_ready = []
 
+var world
+
 
 func _ready():
 	multiplayer.connect("peer_connected", self._player_connected)
@@ -33,12 +35,10 @@ func _ready():
 	multiplayer.connect("connection_failed", Callable(self, "_connected_fail"))
 	multiplayer.connect("server_disconnected", Callable(self, "_server_disconnected"))
 
-
 # Callback from SceneTree.
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
-
 
 # Callback from SceneTree.
 func _player_disconnected(id):
@@ -50,42 +50,33 @@ func _player_disconnected(id):
 		# Unregister this player.
 		unregister_player(id)
 
-
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok():
 	# We just connected to a server
 	emit_signal("connection_succeeded")
-
 
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected():
 	emit_signal("game_error", "Server disconnected")
 	end_game()
 
-
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail():
 	multiplayer.set_multiplayer_peer(null) # Remove peer
 	emit_signal("connection_failed")
 
-
-# Lobby management functions.
-
 @rpc("any_peer") func register_player(new_player_name):
 	var id = multiplayer.get_remote_sender_id()
-	print(id)
-	players[id] = new_player_name
+	self.players[id] = new_player_name
 	emit_signal("player_list_changed")
-
 
 func unregister_player(id):
 	players.erase(id)
 	emit_signal("player_list_changed")
 
-
 @rpc("any_peer") func pre_start_game(spawn_points):
 	# Change scene.
-	var world = load("res://Levels/Scenes/endless.tscn").instantiate()
+	self.world = load("res://Levels/Scenes/endless.tscn").instantiate()
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("lobby").hide()
@@ -99,15 +90,14 @@ func unregister_player(id):
 		player.set_name(str(p_id)) # Use unique ID as node name.
 		player.position = spawn_pos
 		player.set_multiplayer_authority(p_id) #set unique id as master.
-
 		if p_id == multiplayer.get_unique_id():
 			# If node for this peer id, set name.
 			player.set_player_name(player_name)
 		else:
 			# Otherwise set name from peer.
-			player.set_player_name(players[p_id])
+			player.set_player_name(self.players[p_id])
 
-		world.get_node("Players").add_child(player)
+		self.world.get_node("Players").add_child(player)
 
 	# Set up score.
 	# world.get_node("Score").add_player(multiplayer.get_unique_id(), player_name)

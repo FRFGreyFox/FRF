@@ -7,15 +7,21 @@ extends CharacterBody2D
 @onready var sprite = $Sprite
 @onready var walkTimer = $walkTimer
 @onready var health_bar = $HealthBar
+@export var player := 1 :
+	set(id):
+		player = id
 
 var puppet_pos = Vector2()
 var puppet_motion = Vector2()
-
 var hp = 50
-	
+
 @rpc("any_peer") func _update_state(p_pos, p_motion):
 	puppet_pos = p_pos
 	puppet_motion = p_motion
+
+func _ready():
+	if player == multiplayer.get_unique_id():
+		$Camera2D.make_current()
 
 func _physics_process(_delta):
 	_new_movement()
@@ -23,7 +29,7 @@ func _physics_process(_delta):
 func _new_movement():
 	var motion = Vector2()
 
-	if is_multiplayer_authority():
+	if not is_multiplayer_authority():
 		if Input.is_action_pressed("move_left"):
 			motion += Vector2(-1, 0)
 		if Input.is_action_pressed("move_right"):
