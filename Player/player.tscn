@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://4k1fyqp7ejc3"]
+[gd_scene load_steps=10 format=3 uid="uid://4k1fyqp7ejc3"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_872t5"]
 [ext_resource type="Texture2D" uid="uid://c7vjhqstjpuuv" path="res://Player/sGreyFoxRunAnim6.png" id="2_t2071"]
@@ -33,6 +33,11 @@ _data = {
 "walk": SubResource("Animation_2t058")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u27gm"]
+properties/0/path = NodePath(".:hp")
+properties/0/spawn = true
+properties/0/sync = true
+
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_872t5")
@@ -42,9 +47,6 @@ position = Vector2(0, 4.25)
 scale = Vector2(0.473, 0.5)
 texture = ExtResource("2_t2071")
 hframes = 6
-frame = 5
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -77,6 +79,11 @@ scale = Vector2(0.5, 0.5)
 libraries = {
 "": SubResource("AnimationLibrary_06xe4")
 }
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_u27gm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
