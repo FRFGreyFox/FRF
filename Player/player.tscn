@@ -39,6 +39,7 @@ properties/0/spawn = true
 properties/0/sync = true
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_872t5")
 
@@ -47,6 +48,23 @@ position = Vector2(0, 4.25)
 scale = Vector2(0.473, 0.5)
 texture = ExtResource("2_t2071")
 hframes = 6
+
+[node name="HealthBar" parent="." instance=ExtResource("4_hs8up")]
+offset_left = -18.0
+offset_top = -40.0
+offset_right = -18.0
+offset_bottom = -40.0
+scale = Vector2(0.5, 0.5)
+
+[node name="player_name_label" type="Label" parent="."]
+offset_left = -45.0
+offset_top = 36.0
+offset_right = 46.0
+offset_bottom = 62.0
+text = "Player"
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -60,6 +78,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="HurtBox" parent="." groups=["player"] instance=ExtResource("3_kesnf")]
+visible = false
 position = Vector2(7, 14)
 collision_layer = 2
 collision_mask = 2
@@ -68,13 +87,6 @@ collision_mask = 2
 position = Vector2(2, -7)
 shape = SubResource("RectangleShape2D_q1lno")
 
-[node name="HealthBar" parent="." instance=ExtResource("4_hs8up")]
-offset_left = -18.0
-offset_top = -40.0
-offset_right = -18.0
-offset_bottom = -40.0
-scale = Vector2(0.5, 0.5)
-
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_06xe4")
@@ -82,8 +94,6 @@ libraries = {
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u27gm")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
