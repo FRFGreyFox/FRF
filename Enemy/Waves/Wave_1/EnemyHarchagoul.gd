@@ -1,18 +1,13 @@
-extends CharacterBody2D
-
-
-@export var movement_speed = 100.0
-@export var max_hp = 10
-@export var hp_bar_fill_color = Color(190, 0, 0)
+extends BasicEnemy
 
 @onready var sprite = $sprite
 @onready var anim = $AnimationPlayer
 @onready var health_bar = $HealthBar
 
-var hp = 10
 
 func _ready():
 	anim.play("walk")
+
 
 func _physics_process(_delta):
 	var nearest_player
@@ -32,7 +27,8 @@ func _physics_process(_delta):
 	elif direction.x > -0.1:
 		sprite.flip_h = false
 
-func _on_hurt_box_hurt(damage):
-	hp -= damage
-	if hp <= 0:
+
+func _on_hurt_box_hurt(damage: int):
+	take_damage(damage)
+	if current_hp <= 0:
 		queue_free()

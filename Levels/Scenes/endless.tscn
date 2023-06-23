@@ -1,28 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5yamm2dwtyn2"]
+[gd_scene load_steps=7 format=3 uid="uid://b5yamm2dwtyn2"]
 
 [ext_resource type="Texture2D" uid="uid://ciu6hsih6jdm0" path="res://Sprite/sMap2.png" id="1_57emo"]
-[ext_resource type="PackedScene" uid="uid://wy0k4ge7rfcc" path="res://Utility/enemy_spawner.tscn" id="3_rvtc8"]
-[ext_resource type="PackedScene" uid="uid://dpq5tvydnvgi6" path="res://Enemy/EnemyHarchagoul.tscn" id="4_6mu46"]
-[ext_resource type="Script" path="res://Utility/Spawn_info.gd" id="5_j6rht"]
+[ext_resource type="Script" path="res://Levels/Scripts/endless.gd" id="1_apguw"]
+[ext_resource type="PackedScene" uid="uid://1g515kp1r0sn" path="res://Enemy/Waves/basic_wave.tscn" id="3_4d462"]
+[ext_resource type="PackedScene" uid="uid://dpq5tvydnvgi6" path="res://Enemy/Waves/Wave_1/EnemyHarchagoul.tscn" id="4_ryvao"]
+[ext_resource type="Script" path="res://Enemy/Spawn/spawn_info.gd" id="5_6tvdj"]
 
-[sub_resource type="Resource" id="Resource_6tn21"]
-script = ExtResource("5_j6rht")
-time_start = 0
-time_end = 5
-enemy = ExtResource("4_6mu46")
-enemy_number = 1
-enemy_spawn_delay = 0.0
+[sub_resource type="Resource" id="Resource_5h8d4"]
+script = ExtResource("5_6tvdj")
+enemy = ExtResource("4_ryvao")
+enemy_total_count = 100
+enemy_spawn_delay = 10.0
+enemy_count_escalating = 5
+enemy_first_wave_count = 10
 
 [node name="Endless" type="Node2D"]
+script = ExtResource("1_apguw")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 3
 texture = ExtResource("1_57emo")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
-
-[node name="EnemySpawner" parent="." instance=ExtResource("3_rvtc8")]
-spawns = Array[ExtResource("5_j6rht")]([SubResource("Resource_6tn21")])
 
 [node name="PlayersSpawnPoints" type="Node2D" parent="."]
 
@@ -32,4 +31,29 @@ position = Vector2(-150, 0)
 [node name="1" type="Marker2D" parent="PlayersSpawnPoints"]
 position = Vector2(150, 0)
 
+[node name="2" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, 150)
+
+[node name="3" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, -150)
+
 [node name="Players" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="waves_timer" type="Timer" parent="."]
+wait_time = 3000.0
+autostart = true
+
+[node name="first_wave_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Waves" type="Node2D" parent="."]
+
+[node name="1" parent="Waves" instance=ExtResource("3_4d462")]
+spawn_info = SubResource("Resource_5h8d4")
+
+[connection signal="timeout" from="waves_timer" to="." method="_on_waves_timer_timeout"]
+[connection signal="timeout" from="first_wave_timer" to="." method="_on_first_wave_timer_timeout"]

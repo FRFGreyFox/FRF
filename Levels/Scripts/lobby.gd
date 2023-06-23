@@ -22,36 +22,34 @@ func _ready():
 	if OS.has_environment("USERNAME"):
 		connect_name.text = OS.get_environment("USERNAME")
 	else:
-		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
+		var desktop_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/").split("/")
 		connect_name.text = desktop_path[desktop_path.size() - 2]
 
 
-func _on_host_pressed():
-	if connect_name.text == "":
+func _check_player_name(player_name: String) -> bool:
+	if player_name == "":
 		connect_error_text.set_text("Invalid name!")
-		return
+		return false
+	return true
 
+
+func _on_host_pressed():
+	if not _check_player_name(connect_name.text):
+		return
 	connect_node.hide()
 	players_node.show()
-	connect_error_text.set_text("")
-
-	var player_name = connect_name.text
-	gamestate.host_game(player_name)
+	gamestate.host_game(connect_name.text)
 	refresh_lobby()
 
 
 func _on_join_pressed():
-	if connect_name.text == "":
-		connect_error_text.set_text("Invalid name!")
+	if not _check_player_name(connect_name.text):
 		return
 
 	var ip = connect_ip.text
 	if not ip.is_valid_ip_address():
 		connect_error_text.set_text("Invalid IP address!")
 		return
-
-	connect_error_text.set_text("")
-	host_button.disabled = true
 
 	var player_name = connect_name.text
 	gamestate.join_game(ip, player_name)
@@ -76,9 +74,7 @@ func _on_game_ended():
 	join_button.disabled = false
 
 
-func _on_game_error(errtxt):
-	# $ErrorDialog.dialog_text = errtxt
-	# $ErrorDialog.popup_centered_clamped()
+func _on_game_error():
 	host_button.disabled = false
 	join_button.disabled = false
 
@@ -88,9 +84,8 @@ func refresh_lobby():
 	players.sort()
 	players_list.clear()
 	players_list.add_item(gamestate.get_player_name() + " (You)")
-	for p in players:
-		players_list.add_item(p)
-
+	for player in players:
+		players_list.add_item(player)
 	players_start.disabled = not multiplayer.is_server()
 
 

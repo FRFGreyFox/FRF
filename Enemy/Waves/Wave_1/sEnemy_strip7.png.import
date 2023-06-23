@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdbgobbpn538e"
-path="res://.godot/imported/sEnemy_strip7.png-21a1e0bcaae76ee36c7bfc316a189396.ctex"
+path="res://.godot/imported/sEnemy_strip7.png-40bdc3d0f0dd9944786dd30108985076.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/sEnemy_strip7.png"
-dest_files=["res://.godot/imported/sEnemy_strip7.png-21a1e0bcaae76ee36c7bfc316a189396.ctex"]
+source_file="res://Enemy/Waves/Wave_1/sEnemy_strip7.png"
+dest_files=["res://.godot/imported/sEnemy_strip7.png-40bdc3d0f0dd9944786dd30108985076.ctex"]
 
 [params]
 
