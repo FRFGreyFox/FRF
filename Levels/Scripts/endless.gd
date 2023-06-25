@@ -4,6 +4,8 @@ extends Node2D
 
 @onready var waves_node = $Waves
 @onready var enemies = $Enemies
+@onready var playerls = $Players
+@onready var players_bullets = $PlayersBullets
 
 var current_wave: BasicWave
 

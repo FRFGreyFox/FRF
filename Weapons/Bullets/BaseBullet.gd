@@ -5,11 +5,14 @@ class_name Base_bullet
 @onready var life_timer = $LifeTimer
 @export var bullet_info: Bullet_info
 
-func run():
-	print("вылетила пуля")
+
+func fire(start_position: Vector2):
+	global_position = start_position
+
 
 func _life_timer_end():
 	queue_free()
 
+
 func _ready():
-	life_timer.wait_time = bullet_info.life_time
+	life_timer.start(bullet_info.life_time)
