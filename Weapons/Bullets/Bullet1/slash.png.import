@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n2516yij5air"
-path="res://.godot/imported/sGreyFoxRunAnim6.png-021494cd09132a01c34316751b07beb2.ctex"
+uid="uid://c45x74byix1yd"
+path="res://.godot/imported/slash.png-765d702909abe6775b197892c208a54d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/sGreyFoxRunAnim6.png"
-dest_files=["res://.godot/imported/sGreyFoxRunAnim6.png-021494cd09132a01c34316751b07beb2.ctex"]
+source_file="res://Weapons/Bullets/Bullet1/slash.png"
+dest_files=["res://.godot/imported/slash.png-765d702909abe6775b197892c208a54d.ctex"]
 
 [params]
 

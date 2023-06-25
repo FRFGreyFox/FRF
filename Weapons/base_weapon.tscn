@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd2p5dl7r6v8v"]
+
+[ext_resource type="Script" path="res://Weapons/base_weapon.gd" id="1_0ipye"]
+[ext_resource type="PackedScene" uid="uid://j3g48xbxwvnw" path="res://Weapons/Bullets/BaseBullet.tscn" id="2_4pcur"]
+[ext_resource type="Script" path="res://Weapons/weapon_info.gd" id="3_4kby8"]
+
+[sub_resource type="Resource" id="Resource_50sfs"]
+script = ExtResource("3_4kby8")
+bullet = ExtResource("2_4pcur")
+rate_of_fire = 1.0
+
+[node name="BaseWeapon" type="Node2D"]
+script = ExtResource("1_0ipye")
+weapon_info = SubResource("Resource_50sfs")
+
+[node name="AttackTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
