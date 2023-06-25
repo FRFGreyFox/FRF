@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var weapon_resource: Resource
 @export var base_movement_speed = 200
 @export var max_hp = 50
 @export var hp_bar_fill_color = Color(0, 190, 0)
@@ -10,14 +11,18 @@ extends CharacterBody2D
 @onready var sprite = $Sprite
 @onready var walkTimer = $walkTimer
 @onready var health_bar = $HealthBar
+
+
 @onready var current_movement_speed = base_movement_speed
 
 var puppet_pos = Vector2()
 var puppet_motion = Vector2()
 var hp = 50
-
+var current_weapon
 
 func _ready():
+	current_weapon = weapon_resource.instantiate()
+	add_child(current_weapon)
 	if player_id == multiplayer.get_unique_id():
 		$Camera2D.make_current()
 
@@ -30,10 +35,13 @@ func get_player_id() -> int:
 @rpc("any_peer") func _update_state(p_pos, p_motion):
 	puppet_pos = p_pos
 	puppet_motion = p_motion
+	
 
 func _physics_process(_delta):
 	_new_movement()
-
+	#is_multiplayer_authority() and 
+	#if is_multiplayer_authority():
+		
 func _new_movement():
 	var motion = Vector2()
 
