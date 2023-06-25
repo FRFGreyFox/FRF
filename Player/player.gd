@@ -3,7 +3,6 @@ extends CharacterBody2D
 @export var weapon_resource: Resource
 @export var base_movement_speed = 200
 @export var max_hp = 50
-@export var hp_bar_fill_color = Color(0, 190, 0)
 @export var player_id := 1 :
 	set(id):
 		player_id = id
@@ -18,7 +17,8 @@ extends CharacterBody2D
 var puppet_pos = Vector2()
 var puppet_motion = Vector2()
 var hp = 50
-var current_weapon
+var current_weapon: Base_Weapon
+
 
 func _ready():
 	current_weapon = weapon_resource.instantiate()
@@ -26,22 +26,25 @@ func _ready():
 	if player_id == multiplayer.get_unique_id():
 		$Camera2D.make_current()
 
+
 func set_player_id(id: int):
 	player_id = id
 
-func get_player_id() -> int:
-	return player_id
+
+func set_new_weapon(new_weapon: Base_Weapon):
+	current_weapon.queue_free()
+	current_weapon = new_weapon
+
 
 @rpc("any_peer") func _update_state(p_pos, p_motion):
 	puppet_pos = p_pos
 	puppet_motion = p_motion
-	
+
 
 func _physics_process(_delta):
 	_new_movement()
-	#is_multiplayer_authority() and 
-	#if is_multiplayer_authority():
-		
+
+
 func _new_movement():
 	var motion = Vector2()
 
@@ -74,11 +77,11 @@ func _new_movement():
 	if not is_multiplayer_authority():
 		puppet_pos = position # To avoid jitter
 
-func _process(delta):
-	health_bar.update_health_bar(self.hp)
 
 func _on_hurt_box_hurt(damage):
 	hp -= damage
+	health_bar.update_health_bar(hp)
+
 
 func set_player_name(new_name: String):
 	get_node("player_name_label").set_text(new_name)

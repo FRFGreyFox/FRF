@@ -55,5 +55,7 @@ autostart = true
 [node name="1" parent="Waves" instance=ExtResource("3_4d462")]
 spawn_info = SubResource("Resource_5h8d4")
 
+[node name="PlayersBullets" type="Node2D" parent="."]
+
 [connection signal="timeout" from="waves_timer" to="." method="_on_waves_timer_timeout"]
 [connection signal="timeout" from="first_wave_timer" to="." method="_on_first_wave_timer_timeout"]

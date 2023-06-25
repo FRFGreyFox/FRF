@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d04vlom7ley3d" path="res://Weapons/Weapon1/Weapon1.tscn" id="2_87gwo"]
 [ext_resource type="Texture2D" uid="uid://n2516yij5air" path="res://Player/sGreyFoxRunAnim6.png" id="2_t2071"]
 [ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/hurt_box.tscn" id="3_kesnf"]
-[ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar.tscn" id="4_hs8up"]
+[ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar/HealthBar.tscn" id="4_hs8up"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_33yk3"]
 radius = 30.3412
