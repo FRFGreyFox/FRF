@@ -33,8 +33,10 @@ func get_enemy_random_position():
 
 
 func _on_spawn_timer_timeout():
-	for enemy_id in range(current_enemeis_count):
-		var new_enemy = spawn_info.enemy.instantiate()
-		new_enemy.global_position = get_enemy_random_position()
-		self.get_parent().get_parent().get_node("Enemies").add_child(new_enemy)
+	for player in gamestate.current_world_scene.players.get_children():
+		for enemy_id in range(current_enemeis_count):
+			var new_enemy = spawn_info.enemy.instantiate()
+			new_enemy.target_player = player
+			new_enemy.global_position = get_enemy_random_position()
+			self.get_parent().get_parent().get_node("Enemies").add_child(new_enemy)
 	current_enemeis_count += spawn_info.enemy_count_escalating
