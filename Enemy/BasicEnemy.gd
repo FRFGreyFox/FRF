@@ -10,24 +10,19 @@ class_name BasicEnemy
 @onready var sprite = $Sprite
 @onready var health_bar = $HealthBar
 
-var current_hp = max_hp
+var current_hp: int = max_hp
+var target_player
 
 
 func _ready():
 	health_bar.set_new_stylebox(hp_fill_style)
 	animation.play("walk")
+	if target_player.player_id != multiplayer.get_unique_id():
+		modulate.a = 0.5
 
 
 func _physics_process(_delta):
-	var nearest_player
-	var min_distance = 100000
-	var distance = 0
-	for player in get_tree().get_nodes_in_group("player"):
-		distance = self.global_position.distance_to(player.global_position)
-		if distance < min_distance:
-			min_distance = distance
-			nearest_player = player
-	var direction = global_position.direction_to(nearest_player.global_position)
+	var direction = global_position.direction_to(target_player.global_position)
 	velocity = direction * movement_speed
 	move_and_slide()
 
