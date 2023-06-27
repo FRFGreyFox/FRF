@@ -92,8 +92,12 @@ func _connected_fail():
 	get_tree().get_root().add_child(current_world_scene)
 	get_tree().get_root().get_node("lobby").hide()
 	var player_scene = load("res://Player/player.tscn")
+	var collision_index = 1
 	for p_id in spawn_points:
 		var player = player_scene.instantiate()
+		player.collision_layer = collision_index
+		player.collision_mask = collision_index
+		collision_index += 1
 		player.set_name(str(p_id)) # Use unique ID as node name.
 		player.position = current_world_scene.get_node(
 			"PlayersSpawnPoints/" + str(spawn_points[p_id])

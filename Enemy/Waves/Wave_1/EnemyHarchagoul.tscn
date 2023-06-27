@@ -7,9 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/hit_box.tscn" id="4_2i2p0"]
 [ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar/HealthBar.tscn" id="5_cddim"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8hit"]
-size = Vector2(41.5179, 30.1506)
-
 [sub_resource type="Animation" id="Animation_pbrob"]
 length = 0.001
 tracks/0/type = "value"
@@ -62,9 +59,10 @@ properties/1/path = NodePath(".:current_hp")
 properties/1/spawn = true
 properties/1/sync = true
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8hit"]
+size = Vector2(69.6936, 61.1314)
+
 [node name="EnemyHarchagoul" type="CharacterBody2D"]
-collision_layer = 5
-collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_i44ei")
 hp_fill_style = ExtResource("2_j0k4a")
@@ -75,18 +73,13 @@ scale = Vector2(2.76875, 2.59246)
 texture = ExtResource("2_bjwhj")
 hframes = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(9, 8)
-rotation = -0.523598
-shape = SubResource("RectangleShape2D_p8hit")
-
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_85n8h")
 }
 
 [node name="HurtBox" parent="." instance=ExtResource("3_k3yh6")]
+visible = false
 position = Vector2(159, -34)
 collision_layer = 4
 collision_mask = 4
@@ -96,6 +89,7 @@ position = Vector2(-149.625, 52.375)
 shape = SubResource("RectangleShape2D_b71vv")
 
 [node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_2i2p0")]
+visible = false
 position = Vector2(162, -36)
 collision_layer = 2
 collision_mask = 2
@@ -114,6 +108,11 @@ scale = Vector2(0.6, 0.6)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_155ie")
+
+[node name="PhisicCollision" type="CollisionShape2D" parent="."]
+position = Vector2(3, 16)
+rotation = -0.523598
+shape = SubResource("RectangleShape2D_p8hit")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

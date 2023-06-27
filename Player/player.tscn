@@ -6,10 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/hurt_box.tscn" id="3_kesnf"]
 [ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar/HealthBar.tscn" id="4_hs8up"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_33yk3"]
-radius = 30.3412
-height = 64.6936
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1lno"]
 size = Vector2(53, 66)
 
@@ -38,6 +34,10 @@ _data = {
 properties/0/path = NodePath(".:hp")
 properties/0/spawn = true
 properties/0/sync = true
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_33yk3"]
+radius = 30.3412
+height = 64.6936
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -69,12 +69,6 @@ horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(7, 23)
-rotation = 0.523598
-shape = SubResource("CapsuleShape2D_33yk3")
-
 [node name="walkTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.2
@@ -97,6 +91,11 @@ libraries = {
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u27gm")
+
+[node name="PhisicCollision" type="CollisionShape2D" parent="."]
+position = Vector2(5, 13)
+rotation = 0.523598
+shape = SubResource("CapsuleShape2D_33yk3")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
