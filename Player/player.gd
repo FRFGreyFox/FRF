@@ -11,7 +11,6 @@ extends CharacterBody2D
 @onready var walkTimer = $walkTimer
 @onready var health_bar = $HealthBar
 
-
 @onready var current_movement_speed = base_movement_speed
 
 var puppet_pos = Vector2()

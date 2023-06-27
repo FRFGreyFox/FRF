@@ -34,6 +34,9 @@ _data = {
 properties/0/path = NodePath(".:hp")
 properties/0/spawn = true
 properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_33yk3"]
 radius = 30.3412
