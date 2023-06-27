@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Frf Ultima"
-run/main_scene="res://Levels/Scenes/lobby.tscn"
+run/main_scene="res://Levels/Menues/MainMenu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 gamestate="*res://Levels/Scripts/gamestate.gd"
+settings="*res://Utility/config.gd"
 
 [display]
 
@@ -54,6 +55,11 @@ AAA={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/locale_filter_mode=0
+locale/language_filter=[]
 
 [layer_names]
 
