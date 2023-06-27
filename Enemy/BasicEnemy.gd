@@ -19,6 +19,7 @@ func _ready():
 	animation.play("walk")
 	if target_player.player_id != multiplayer.get_unique_id():
 		modulate.a = 0.5
+		health_bar.hide()
 
 
 func _physics_process(_delta):

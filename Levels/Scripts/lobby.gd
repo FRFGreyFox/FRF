@@ -74,7 +74,7 @@ func _on_game_ended():
 	join_button.disabled = false
 
 
-func _on_game_error():
+func _on_game_error(err):
 	host_button.disabled = false
 	join_button.disabled = false
 
