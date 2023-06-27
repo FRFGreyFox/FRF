@@ -55,15 +55,15 @@ text = "START"
 
 [node name="Connect" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.0
-offset_top = -88.0
-offset_right = 199.0
-offset_bottom = 89.0
+anchors_preset = -1
+anchor_left = 0.33
+anchor_top = 0.364
+anchor_right = 0.673
+anchor_bottom = 0.637
+offset_left = -0.160004
+offset_top = 0.127991
+offset_right = -0.296021
+offset_bottom = 0.223999
 grow_horizontal = 2
 grow_vertical = 2
 

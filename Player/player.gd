@@ -17,6 +17,8 @@ var puppet_pos = Vector2()
 var puppet_motion = Vector2()
 var hp = 50
 var current_weapon: Base_Weapon
+var angle: float
+var puppet_angle : float
 
 
 func _ready():
@@ -39,9 +41,17 @@ func set_new_weapon(new_weapon: Base_Weapon):
 	puppet_pos = p_pos
 	puppet_motion = p_motion
 
+@rpc("any_peer") func _update_angle(new_angle):
+	puppet_angle = new_angle
+
 
 func _physics_process(_delta):
 	_new_movement()
+	if is_multiplayer_authority():
+		angle = global_position.direction_to(get_global_mouse_position()).angle()
+		rpc("_update_angle", angle)
+	else:
+		angle = puppet_angle
 
 
 func _new_movement():

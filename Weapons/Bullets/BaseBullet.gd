@@ -5,9 +5,9 @@ class_name Base_bullet
 @onready var life_timer = $LifeTimer
 @export var bullet_info: Bullet_info
 
-func fire(start_position: Vector2, new_rotation):
+func fire(start_position: Vector2, angle: float):
 	global_position = start_position
-	rotation = new_rotation
+	rotation = angle
 	
 func _life_timer_end():
 	queue_free()
