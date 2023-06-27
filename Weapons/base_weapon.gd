@@ -20,4 +20,8 @@ func update_bullet(new_bullet):
 func _on_attack_timer_timeout():
 	var new_bullet = weapon_info.bullet.instantiate()
 	gamestate.current_world_scene.players_bullets.add_child(new_bullet)
-	new_bullet.fire(player.global_position)
+	new_bullet.fire(
+		player.global_position,
+		global_position.direction_to(get_global_mouse_position()).angle()
+	)
+	

@@ -1,13 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://fdobh1palu5a"]
 
 [ext_resource type="Script" path="res://Weapons/Bullets/BaseBullet.gd" id="1_h4dye"]
-[ext_resource type="Script" path="res://Weapons/Bullets/bullet_info.gd" id="2_7p1j2"]
+[ext_resource type="Script" path="res://Weapons/Bullets/bullet_info.gd" id="2_weddk"]
 [ext_resource type="Texture2D" uid="uid://c45x74byix1yd" path="res://Weapons/Bullets/Bullet1/slash.png" id="3_438cx"]
 
-[sub_resource type="Resource" id="Resource_0lwt4"]
-script = ExtResource("2_7p1j2")
+[sub_resource type="Resource" id="Resource_hmxht"]
+script = ExtResource("2_weddk")
 damage = 1
-life_time = 1.0
+life_time = 5.0
+speed = 450.0
 
 [sub_resource type="Animation" id="Animation_s01nj"]
 resource_name = "fire"
@@ -33,9 +34,10 @@ _data = {
 
 [node name="Bullet1" type="Node2D"]
 script = ExtResource("1_h4dye")
-bullet_info = SubResource("Resource_0lwt4")
+bullet_info = SubResource("Resource_hmxht")
 
 [node name="LifeTimer" type="Timer" parent="."]
+autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_438cx")
