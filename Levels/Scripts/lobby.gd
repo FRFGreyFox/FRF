@@ -77,6 +77,7 @@ func _on_game_ended():
 func _on_game_error(err):
 	host_button.disabled = false
 	join_button.disabled = false
+	print_debug(err)
 
 
 func refresh_lobby():
