@@ -92,6 +92,7 @@ func refresh_lobby():
 
 func _on_start_pressed():
 	gamestate.begin_game()
+	queue_free()
 
 
 func _on_find_public_ip_pressed():

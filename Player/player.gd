@@ -56,8 +56,11 @@ func _physics_process(_delta):
 
 
 func _process(delta):
-	if Input.is_action_pressed("ingame_menu"):
-		ingame_menu.show()
+	if Input.is_action_just_pressed("ingame_menu"):
+		if ingame_menu.visible:
+			ingame_menu.hide()
+		else:
+			ingame_menu.show()
 
 
 func _new_movement():
