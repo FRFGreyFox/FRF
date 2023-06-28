@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://4k1fyqp7ejc3"]
+[gd_scene load_steps=12 format=3 uid="uid://4k1fyqp7ejc3"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_872t5"]
 [ext_resource type="PackedScene" uid="uid://d04vlom7ley3d" path="res://Weapons/Weapon1/Weapon1.tscn" id="2_87gwo"]
 [ext_resource type="Texture2D" uid="uid://n2516yij5air" path="res://Player/sGreyFoxRunAnim6.png" id="2_t2071"]
 [ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/hurt_box.tscn" id="3_kesnf"]
 [ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar/HealthBar.tscn" id="4_hs8up"]
+[ext_resource type="PackedScene" uid="uid://ci53v2ne7vabf" path="res://Levels/Menues/IngameMainMenu.tscn" id="6_4dy0v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1lno"]
 size = Vector2(53, 66)
@@ -99,6 +100,13 @@ replication_config = SubResource("SceneReplicationConfig_u27gm")
 position = Vector2(1, 15)
 rotation = 0.523598
 shape = SubResource("CapsuleShape2D_33yk3")
+
+[node name="IngameMainMenu" parent="." instance=ExtResource("6_4dy0v")]
+visible = false
+offset_left = -575.0
+offset_top = -325.0
+offset_right = 577.0
+offset_bottom = 323.0
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

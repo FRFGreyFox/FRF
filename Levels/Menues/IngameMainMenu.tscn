@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci53v2ne7vabf"]
+
+[ext_resource type="Script" path="res://Levels/Scripts/IngameMainMenu.gd" id="1_jtly2"]
+
+[node name="IngameMainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jtly2")
+
+[node name="IngameMainPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.3
+anchor_right = 0.6
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="IngameMainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.15
+text = "вернуться в игру"
+language = "ru_RU"
+
+[node name="Settings" type="Button" parent="IngameMainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.17
+anchor_right = 0.98
+anchor_bottom = 0.3
+disabled = true
+text = "настройки (в разработке)"
+
+[node name="ExitMainMenu" type="Button" parent="IngameMainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.7
+anchor_right = 0.98
+anchor_bottom = 0.83
+disabled = true
+text = "выход в главное меню"
+text_overrun_behavior = 3
+language = "ru_RU"
+
+[node name="ExitGame" type="Button" parent="IngameMainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.85
+anchor_right = 0.98
+anchor_bottom = 0.98
+text = "выход из игры"
+language = "ru_RU"
+
+[connection signal="pressed" from="IngameMainPanel/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="IngameMainPanel/ExitGame" to="." method="_on_exit_game_pressed"]
