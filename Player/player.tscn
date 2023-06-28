@@ -96,7 +96,7 @@ libraries = {
 replication_config = SubResource("SceneReplicationConfig_u27gm")
 
 [node name="PhisicCollision" type="CollisionShape2D" parent="."]
-position = Vector2(5, 13)
+position = Vector2(1, 15)
 rotation = 0.523598
 shape = SubResource("CapsuleShape2D_33yk3")
 

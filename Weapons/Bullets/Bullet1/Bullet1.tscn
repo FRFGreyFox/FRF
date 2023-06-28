@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://fdobh1palu5a"]
+[gd_scene load_steps=9 format=3 uid="uid://fdobh1palu5a"]
 
 [ext_resource type="Script" path="res://Weapons/Bullets/BaseBullet.gd" id="1_h4dye"]
 [ext_resource type="Script" path="res://Weapons/Bullets/bullet_info.gd" id="2_weddk"]
 [ext_resource type="Texture2D" uid="uid://c45x74byix1yd" path="res://Weapons/Bullets/Bullet1/slash.png" id="3_438cx"]
+[ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/hit_box.tscn" id="4_f1n75"]
 
 [sub_resource type="Resource" id="Resource_hmxht"]
 script = ExtResource("2_weddk")
@@ -13,7 +14,6 @@ speed = 450.0
 [sub_resource type="Animation" id="Animation_s01nj"]
 resource_name = "fire"
 length = 0.9
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -24,13 +24,16 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [3, 2, 1, 0]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dy8vx"]
 _data = {
 "fire": SubResource("Animation_s01nj")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxxyb"]
+size = Vector2(5.18559, 67.7311)
 
 [node name="Bullet1" type="Node2D"]
 script = ExtResource("1_h4dye")
@@ -49,4 +52,16 @@ libraries = {
 "": SubResource("AnimationLibrary_dy8vx")
 }
 
+[node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_f1n75")]
+collision_layer = 4
+collision_mask = 4
+damage = 10
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(78, -13)
+rotation = -0.221657
+shape = SubResource("RectangleShape2D_lxxyb")
+
 [connection signal="timeout" from="LifeTimer" to="." method="_life_timer_end"]
+
+[editable path="HitBox"]
