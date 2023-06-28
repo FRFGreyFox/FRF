@@ -54,7 +54,6 @@ position = Vector2(0, 4.25)
 scale = Vector2(0.473, 0.5)
 texture = ExtResource("2_t2071")
 hframes = 6
-frame = 4
 
 [node name="HealthBar" parent="." instance=ExtResource("4_hs8up")]
 offset_left = -18.0
