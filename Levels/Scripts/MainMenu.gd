@@ -28,15 +28,15 @@ func _ready():
 		music_slider.value = music_volume
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_volume)
 	
+	var sound_volume = settings.get_config("sound", "sound")
+	if not sound_volume == null:
+		sound_slider.value = sound_volume
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"), sound_volume)
+	
 	var display_mode_config = settings.get_config("display", "display_mode")
 	if not display_mode_config == null:
-		var display_mode_value: int = 0
-		match display_mode_config:
-			0: display_mode_value = DisplayServer.WINDOW_MODE_WINDOWED
-			1: display_mode_value = DisplayServer.WINDOW_MODE_MAXIMIZED
-			2: display_mode_value = DisplayServer.WINDOW_MODE_FULLSCREEN
+		_update_display_mode(display_mode_config)
 		display_mode.selected = display_mode_config
-		DisplayServer.window_set_mode(display_mode_value)
 	
 	var vsync_mode_config = settings.get_config("display", "vsync")
 	if not vsync_mode_config == null:
@@ -51,6 +51,14 @@ func _ready():
 		vsync_mode.selected = 1
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 
+
+func _update_display_mode(idx: int):
+	var display_mode_value: int = 0
+	match idx:
+		0: display_mode_value = DisplayServer.WINDOW_MODE_WINDOWED
+		1: display_mode_value = DisplayServer.WINDOW_MODE_MAXIMIZED
+		2: display_mode_value = DisplayServer.WINDOW_MODE_FULLSCREEN
+	DisplayServer.window_set_mode(display_mode_value)
 
 func _on_exit_button_pressed():
 	get_tree().quit()
@@ -99,8 +107,10 @@ func _on_apply_button_pressed():
 	save_label.show()
 	save_label_timer.start()
 	
-	# TODO: сохранять в файл настроек
+	_update_display_mode(display_mode.selected)
+	
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_slider.value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"), sound_slider.value)
 
 	# Сохранение громкости музыки
 	settings.save_config("sound", "music", music_slider.value)

@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var sprite = $Sprite
 @onready var walkTimer = $walkTimer
 @onready var health_bar = $HealthBar
+@onready var ingame_menu = $IngameMainMenu
 
 @onready var current_movement_speed = base_movement_speed
 
@@ -52,6 +53,12 @@ func _physics_process(_delta):
 		rpc("_update_angle", angle)
 	else:
 		angle = puppet_angle
+
+
+func _process(delta):
+	if Input.is_action_pressed("ingame_menu"):
+		ingame_menu.show()
+
 
 func _new_movement():
 	var motion = Vector2()
