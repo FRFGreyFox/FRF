@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://byj3xpdmc5617"]
+
+[ext_resource type="Script" path="res://Levels/Scripts/EndGameMenu.gd" id="1_kxeyf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pmbtk"]
+font_size = 30
+
+[node name="EndGameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kxeyf")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.8
+
+[node name="EndGameLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.15
+text = "игра закончена"
+label_settings = SubResource("LabelSettings_pmbtk")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="MainMenuButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.76
+anchor_right = 0.98
+anchor_bottom = 0.86
+text = "выход в главное меню"
+language = "ru_RU"
+
+[node name="ExitButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.98
+anchor_bottom = 0.98
+text = "выход из игры"
+language = "ru_RU"
+
+[connection signal="pressed" from="Panel/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Panel/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -64,7 +64,7 @@ ingame_menu={
 
 [internationalization]
 
-locale/locale_filter_mode=0
+locale/locale_filter_mode=1
 locale/language_filter=[]
 
 [layer_names]

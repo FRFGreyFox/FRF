@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5yamm2dwtyn2"]
+[gd_scene load_steps=9 format=3 uid="uid://b5yamm2dwtyn2"]
 
-[ext_resource type="Texture2D" uid="uid://ciu6hsih6jdm0" path="res://Sprite/sMap2.png" id="1_57emo"]
 [ext_resource type="Script" path="res://Levels/Scripts/endless.gd" id="1_apguw"]
+[ext_resource type="Texture2D" uid="uid://mp4c0c64o5vb" path="res://Resources/Sprites/default_background.png" id="2_nstp7"]
 [ext_resource type="PackedScene" uid="uid://1g515kp1r0sn" path="res://Enemy/Waves/basic_wave.tscn" id="3_4d462"]
 [ext_resource type="PackedScene" uid="uid://dpq5tvydnvgi6" path="res://Enemy/Waves/Wave_1/EnemyHarchagoul.tscn" id="4_ryvao"]
 [ext_resource type="Script" path="res://Enemy/Spawn/spawn_info.gd" id="5_6tvdj"]
+[ext_resource type="Texture2D" uid="uid://g4utf3rbjo3p" path="res://Resources/Sprites/caster.png" id="8_c5fpv"]
 
 [sub_resource type="Resource" id="Resource_5h8d4"]
 script = ExtResource("5_6tvdj")
@@ -14,14 +15,17 @@ enemy_spawn_delay = 10.0
 enemy_count_escalating = 5
 enemy_first_wave_count = 10
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5mul0"]
+polygon = PackedVector2Array(-15, -15, 15, -15, 15, 15, -15, 15)
+
 [node name="Endless" type="Node2D"]
 script = ExtResource("1_apguw")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 3
-texture = ExtResource("1_57emo")
+texture = ExtResource("2_nstp7")
 region_enabled = true
-region_rect = Rect2(-4000, -4000, 4000, 4000)
+region_rect = Rect2(0, 0, 8000, 8000)
 
 [node name="PlayersSpawnPoints" type="Node2D" parent="."]
 
@@ -57,5 +61,22 @@ spawn_info = SubResource("Resource_5h8d4")
 
 [node name="PlayersBullets" type="Node2D" parent="."]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.74902, 0.74902, 0.74902, 1)
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(380, 343)
+texture = ExtResource("8_c5fpv")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D/Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_5mul0")
+
+[node name="PlayersLifeCheckTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="waves_timer" to="." method="_on_waves_timer_timeout"]
 [connection signal="timeout" from="first_wave_timer" to="." method="_on_first_wave_timer_timeout"]
+[connection signal="timeout" from="PlayersLifeCheckTimer" to="." method="_on_players_life_check_timer_timeout"]
