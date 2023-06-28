@@ -6,7 +6,6 @@ extends Control
 @onready var settings_screen = $SettingsPanel/SettingsScreenPanel
 @onready var settings_audio = $SettingsPanel/SettingsSoundPanel
 @onready var settings_control = $SettingsPanel/SettingsControllPanel
-@onready var menu_music = $MenuMusic
 @onready var music_slider = $SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/MusicGroup/MusicSlider
 @onready var sound_slider = $SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/SoundGroup/SoundSlider
 @onready var display_mode = $SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/WindowModeGroup/DisplayMode
@@ -23,10 +22,11 @@ extends Control
 
 
 func _ready():
+	
 	var music_volume = settings.get_config("sound", "music")
 	if not music_volume == null:
 		music_slider.value = music_volume
-		menu_music.volume_db = music_volume
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_volume)
 	
 	var display_mode_config = settings.get_config("display", "display_mode")
 	if not display_mode_config == null:
@@ -48,6 +48,7 @@ func _ready():
 		vsync_mode.selected = vsync_mode_config
 		DisplayServer.window_set_vsync_mode(vsync_mode_value)
 	else:
+		vsync_mode.selected = 1
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 
 
@@ -99,7 +100,7 @@ func _on_apply_button_pressed():
 	save_label_timer.start()
 	
 	# TODO: сохранять в файл настроек
-	menu_music.volume_db = music_slider.value
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_slider.value)
 
 	# Сохранение громкости музыки
 	settings.save_config("sound", "music", music_slider.value)

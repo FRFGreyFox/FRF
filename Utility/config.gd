@@ -16,4 +16,6 @@ func save_config(section: String, key: String, value):
 
 
 func get_config(section: String, key: String):
+	if err != OK:
+		return
 	return config.get_value(section, key, null)
