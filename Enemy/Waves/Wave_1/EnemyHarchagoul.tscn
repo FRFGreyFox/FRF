@@ -45,8 +45,8 @@ _data = {
 "walk": SubResource("Animation_p2was")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b71vv"]
-size = Vector2(57.25, 46.75)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8lobv"]
+radius = 197.18
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g58os"]
 size = Vector2(66, 63)
@@ -86,7 +86,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(-149.625, 52.375)
-shape = SubResource("RectangleShape2D_b71vv")
+shape = SubResource("CircleShape2D_8lobv")
 
 [node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_2i2p0")]
 visible = false
@@ -110,7 +110,7 @@ scale = Vector2(0.6, 0.6)
 replication_config = SubResource("SceneReplicationConfig_155ie")
 
 [node name="PhisicCollision" type="CollisionShape2D" parent="."]
-position = Vector2(3, 16)
+position = Vector2(7, 15)
 rotation = -0.523598
 shape = SubResource("RectangleShape2D_p8hit")
 

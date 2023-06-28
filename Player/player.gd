@@ -53,7 +53,6 @@ func _physics_process(_delta):
 	else:
 		angle = puppet_angle
 
-
 func _new_movement():
 	var motion = Vector2()
 
