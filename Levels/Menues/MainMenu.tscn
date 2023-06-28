@@ -271,7 +271,7 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-min_value = -70.0
+min_value = -60.0
 max_value = 0.0
 tick_count = 5
 ticks_on_borders = true
@@ -373,6 +373,7 @@ wait_time = 0.1
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ir8ub")
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="MainPanel/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MainPanel/SettingsButton" to="." method="_on_settings_button_pressed"]
