@@ -1,15 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://fdobh1palu5a"]
+[gd_scene load_steps=6 format=3 uid="uid://fdobh1palu5a"]
 
 [ext_resource type="Script" path="res://Weapons/Bullets/BaseBullet.gd" id="1_h4dye"]
-[ext_resource type="Script" path="res://Weapons/Bullets/bullet_info.gd" id="2_weddk"]
 [ext_resource type="Texture2D" uid="uid://c45x74byix1yd" path="res://Weapons/Bullets/Bullet1/slash.png" id="3_438cx"]
-[ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/hit_box.tscn" id="4_f1n75"]
-
-[sub_resource type="Resource" id="Resource_hmxht"]
-script = ExtResource("2_weddk")
-damage = 1
-life_time = 5.0
-speed = 450.0
+[ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/HitBox/hit_box.tscn" id="4_f1n75"]
 
 [sub_resource type="Animation" id="Animation_s01nj"]
 resource_name = "fire"
@@ -32,17 +25,16 @@ _data = {
 "fire": SubResource("Animation_s01nj")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxxyb"]
-size = Vector2(5.18559, 67.7311)
-
 [node name="Bullet1" type="Node2D"]
 script = ExtResource("1_h4dye")
-bullet_info = SubResource("Resource_hmxht")
+damage = 10
+through_limit = 2
 
 [node name="LifeTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_438cx")
 hframes = 4
 frame = 3
@@ -55,13 +47,12 @@ libraries = {
 [node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_f1n75")]
 collision_layer = 4
 collision_mask = 4
-damage = 10
 
-[node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2(78, -13)
-rotation = -0.221657
-shape = SubResource("RectangleShape2D_lxxyb")
+[node name="CollisionPolygon2D" parent="HitBox" index="0"]
+build_mode = 1
+polygon = PackedVector2Array(-16, -39, 4, -34, 17, -23, 26, -8, 27, 8, 25, 18, 22, 24, 14, 28, 5, 31, 8, 36, 20, 41, 29, 37, 39, 25, 42, 3, 34, -23, 11, -39, -13, -43, -30, -39, -45, -28, -35, -33)
 
 [connection signal="timeout" from="LifeTimer" to="." method="_life_timer_end"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 
 [editable path="HitBox"]

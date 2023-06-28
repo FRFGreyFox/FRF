@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpq5tvydnvgi6"]
+[gd_scene load_steps=13 format=3 uid="uid://dpq5tvydnvgi6"]
 
 [ext_resource type="Script" path="res://Enemy/BasicEnemy.gd" id="1_i44ei"]
 [ext_resource type="Texture2D" uid="uid://cdbgobbpn538e" path="res://Enemy/Waves/Wave_1/sEnemy_strip7.png" id="2_bjwhj"]
 [ext_resource type="StyleBox" uid="uid://bd77tqxe26tsa" path="res://Utility/HealthBar/EnemyHealthBarStyle.tres" id="2_j0k4a"]
-[ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/hurt_box.tscn" id="3_k3yh6"]
-[ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/hit_box.tscn" id="4_2i2p0"]
+[ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/HurtBox/hurt_box.tscn" id="3_k3yh6"]
+[ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/HitBox/hit_box.tscn" id="4_2i2p0"]
 [ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar/HealthBar.tscn" id="5_cddim"]
 
 [sub_resource type="Animation" id="Animation_pbrob"]
@@ -46,10 +46,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8lobv"]
-radius = 197.18
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g58os"]
-size = Vector2(66, 63)
+radius = 33.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_155ie"]
 properties/0/path = NodePath(".:global_position")
@@ -60,7 +57,7 @@ properties/1/spawn = true
 properties/1/sync = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8hit"]
-size = Vector2(69.6936, 61.1314)
+size = Vector2(48.2128, 26.3205)
 
 [node name="EnemyHarchagoul" type="CharacterBody2D"]
 motion_mode = 1
@@ -78,7 +75,7 @@ libraries = {
 "": SubResource("AnimationLibrary_85n8h")
 }
 
-[node name="HurtBox" parent="." instance=ExtResource("3_k3yh6")]
+[node name="HurtBox" parent="." groups=["enemy"] instance=ExtResource("3_k3yh6")]
 visible = false
 position = Vector2(159, -34)
 collision_layer = 4
@@ -87,17 +84,6 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(-149.625, 52.375)
 shape = SubResource("CircleShape2D_8lobv")
-
-[node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_2i2p0")]
-visible = false
-position = Vector2(162, -36)
-collision_layer = 2
-collision_mask = 2
-damage = 2
-
-[node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2(-155, 51)
-shape = SubResource("RectangleShape2D_g58os")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_cddim")]
 offset_left = -20.0
@@ -110,9 +96,19 @@ scale = Vector2(0.6, 0.6)
 replication_config = SubResource("SceneReplicationConfig_155ie")
 
 [node name="PhisicCollision" type="CollisionShape2D" parent="."]
-position = Vector2(7, 15)
+visible = false
+position = Vector2(6.29664, 17.5497)
 rotation = -0.523598
 shape = SubResource("RectangleShape2D_p8hit")
+
+[node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_2i2p0")]
+visible = false
+position = Vector2(162, -36)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" parent="HitBox" index="0"]
+polygon = PackedVector2Array(-175, 42, -196, 53, -214, 62, -217, 66, -205, 65, -191, 70, -179, 77, -179, 92, -155, 93, -126, 83, -130, 65, -123, 52, -127, 22, -135, -7, -156, -10, -173, -4, -165, 22)
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

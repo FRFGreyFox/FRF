@@ -23,3 +23,4 @@ func _on_exit_main_menu_pressed():
 	var main_menu = load("res://Levels/Menues/MainMenu.tscn").instantiate()
 	get_tree().get_root().add_child(main_menu)
 	gamestate.current_world_scene.queue_free()
+	queue_free()

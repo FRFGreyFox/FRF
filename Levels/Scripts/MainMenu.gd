@@ -6,6 +6,7 @@ extends Control
 @onready var sound_slider = $SettingsMenu/SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/SoundGroup/SoundSlider
 @onready var display_mode = $SettingsMenu/SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/WindowModeGroup/DisplayMode
 @onready var vsync_mode = $SettingsMenu/SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/VsyncGroup/VSYNC
+@onready var menu_music = $MenuMusic
 
 
 func _on_exit_button_pressed():
@@ -15,6 +16,7 @@ func _on_exit_button_pressed():
 func _on_play_button_pressed():
 	var lobby = load("res://Levels/Scenes/lobby.tscn").instantiate()
 	get_tree().get_root().add_child(lobby)
+	menu_music.stop()
 	queue_free()
 
 

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export_group("player_properties")
 @export var weapon_resource: Resource
 @export var base_movement_speed = 200
 @export var max_hp = 50
@@ -8,9 +9,9 @@ extends CharacterBody2D
 		player_id = id
 
 @onready var sprite = $Sprite
-@onready var walkTimer = $walkTimer
 @onready var health_bar = $HealthBar
 @onready var ingame_menu = $IngameMainMenu
+@onready var endgame_menu = $EndGameMenu
 
 @onready var current_movement_speed = base_movement_speed
 
@@ -20,6 +21,7 @@ var hp = 50
 var current_weapon: Base_Weapon
 var angle: float
 var puppet_angle : float
+var is_alive: bool = true
 
 
 func _ready():
@@ -27,6 +29,7 @@ func _ready():
 	add_child(current_weapon)
 	if player_id == multiplayer.get_unique_id():
 		$Camera2D.make_current()
+	gamestate.current_world_scene.connect("game_ended", _end_game)
 
 
 func set_player_id(id: int):
@@ -47,12 +50,9 @@ func set_new_weapon(new_weapon: Base_Weapon):
 
 
 func _physics_process(_delta):
-	_new_movement()
-	if is_multiplayer_authority():
-		angle = global_position.direction_to(get_global_mouse_position()).angle()
-		rpc("_update_angle", angle)
-	else:
-		angle = puppet_angle
+	if is_alive:
+		_new_movement()
+		_new_angle()
 
 
 func _process(delta):
@@ -61,6 +61,14 @@ func _process(delta):
 			ingame_menu.hide()
 		else:
 			ingame_menu.show()
+
+
+func _new_angle():
+	if is_multiplayer_authority():
+		angle = global_position.direction_to(get_global_mouse_position()).angle()
+		rpc("_update_angle", angle)
+	else:
+		angle = puppet_angle
 
 
 func _new_movement():
@@ -96,10 +104,30 @@ func _new_movement():
 		puppet_pos = position # To avoid jitter
 
 
-func _on_hurt_box_hurt(damage):
-	hp -= damage
-	health_bar.update_health_bar(hp)
+func _on_hurt_box_hurt(damage: int):
+	if is_alive:
+		hp -= damage
+		if hp <= 0:
+			die()
+			return
+		health_bar.update_health_bar(hp)
+
+
+func die():
+		is_alive = false
+		current_weapon.stop_shooting()
+		
+		# TODO: прятать все что связано с игроком
+		# в идеале дать возможность переключать камеру на других игроков
+		sprite.hide()
+		health_bar.hide()
+		$player_name_label.hide()
+	
 
 
 func set_player_name(new_name: String):
 	get_node("player_name_label").set_text(new_name)
+
+
+func _end_game(is_loose: bool):
+	endgame_menu.show()

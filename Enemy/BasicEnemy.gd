@@ -3,18 +3,21 @@ extends CharacterBody2D
 class_name BasicEnemy
 
 @export var max_hp: int = 150
-@export var movement_speed = 100.0
+@export var movement_speed: float = 100.0
+@export var collision_damage: int = 10
 @export var hp_fill_style: StyleBoxFlat
 
 @onready var animation = $Animation
 @onready var sprite = $Sprite
 @onready var health_bar = $HealthBar
+@onready var hit_box = $HitBox
 
 var current_hp: int = max_hp
 var target_player
 
 
 func _ready():
+	hit_box.set_damage(collision_damage)
 	health_bar.set_new_stylebox(hp_fill_style)
 	animation.play("walk")
 	if target_player.player_id != multiplayer.get_unique_id():
