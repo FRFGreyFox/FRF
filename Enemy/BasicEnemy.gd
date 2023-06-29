@@ -25,15 +25,22 @@ func _ready():
 		health_bar.hide()
 
 
-func _physics_process(_delta):
-	var direction = global_position.direction_to(target_player.global_position)
-	velocity = direction * movement_speed
-	move_and_slide()
+@rpc
+func _update_position(new_position):
+	position = new_position
 
-	if direction.x < 0.1:
-		sprite.flip_h = true
-	elif direction.x > -0.1:
-		sprite.flip_h = false
+
+func _physics_process(_delta):
+	if is_multiplayer_authority():
+		var direction = global_position.direction_to(target_player.global_position)
+		velocity = direction * movement_speed
+		move_and_slide()
+
+		if direction.x < 0.1:
+			sprite.flip_h = true
+		elif direction.x > -0.1:
+			sprite.flip_h = false
+		rpc("_update_position", position)
 
 
 func set_hp(new_hp: int):
@@ -44,12 +51,21 @@ func set_movement_speed(new_speed: float):
 	movement_speed = new_speed
 
 
+@rpc("call_local")
 func take_damage(damage_count: int):
 	current_hp -= damage_count
+	
+	if is_multiplayer_authority() and current_hp <= 0:
+		rpc("die")
+	
+	health_bar.update_health_bar(current_hp)
+
+
+@rpc("call_local")
+func die():
+	queue_free()
 
 
 func _on_hurt_box_hurt(damage: int):
-	take_damage(damage)
-	if current_hp <= 0:
-		queue_free()
-	health_bar.update_health_bar(current_hp)
+	if is_multiplayer_authority():
+		rpc("take_damage", damage)

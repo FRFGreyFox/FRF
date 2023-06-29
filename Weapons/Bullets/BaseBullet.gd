@@ -32,7 +32,7 @@ func _physics_process(delta):
 
 
 func _on_hit_box_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemy") and area.get_parent().target_player.player_id == multiplayer.get_unique_id():
 		current_through += 1
 		if current_through >= through_limit:
 			queue_free()

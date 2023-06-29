@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4k1fyqp7ejc3"]
+[gd_scene load_steps=14 format=3 uid="uid://4k1fyqp7ejc3"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_872t5"]
 [ext_resource type="PackedScene" uid="uid://d04vlom7ley3d" path="res://Weapons/Weapon1/Weapon1.tscn" id="2_87gwo"]
@@ -34,14 +34,6 @@ tracks/0/keys = {
 _data = {
 "walk": SubResource("Animation_2t058")
 }
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u27gm"]
-properties/0/path = NodePath(".:hp")
-properties/0/spawn = true
-properties/0/sync = true
-properties/1/path = NodePath(".:angle")
-properties/1/spawn = true
-properties/1/sync = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_33yk3"]
 radius = 30.0
@@ -90,9 +82,6 @@ shape = SubResource("CapsuleShape2D_depra")
 libraries = {
 "": SubResource("AnimationLibrary_06xe4")
 }
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_u27gm")
 
 [node name="PhisicCollision" type="CollisionShape2D" parent="."]
 position = Vector2(2, 9)

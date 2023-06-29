@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpq5tvydnvgi6"]
+[gd_scene load_steps=12 format=3 uid="uid://dpq5tvydnvgi6"]
 
 [ext_resource type="Script" path="res://Enemy/BasicEnemy.gd" id="1_i44ei"]
 [ext_resource type="Texture2D" uid="uid://cdbgobbpn538e" path="res://Enemy/Waves/Wave_1/sEnemy_strip7.png" id="2_bjwhj"]
@@ -48,14 +48,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_8lobv"]
 radius = 33.0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_155ie"]
-properties/0/path = NodePath(".:global_position")
-properties/0/spawn = true
-properties/0/sync = true
-properties/1/path = NodePath(".:current_hp")
-properties/1/spawn = true
-properties/1/sync = true
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8hit"]
 size = Vector2(48.2128, 26.3205)
 
@@ -91,9 +83,6 @@ offset_top = -60.0
 offset_right = -20.0
 offset_bottom = -60.0
 scale = Vector2(0.6, 0.6)
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_155ie")
 
 [node name="PhisicCollision" type="CollisionShape2D" parent="."]
 visible = false

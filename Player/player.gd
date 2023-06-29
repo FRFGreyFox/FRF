@@ -41,11 +41,14 @@ func set_new_weapon(new_weapon: Base_Weapon):
 	current_weapon = new_weapon
 
 
-@rpc("any_peer") func _update_state(p_pos, p_motion):
+@rpc
+func _update_state(p_pos, p_motion):
 	puppet_pos = p_pos
 	puppet_motion = p_motion
 
-@rpc("any_peer") func _update_angle(new_angle):
+
+@rpc
+func _update_angle(new_angle):
 	puppet_angle = new_angle
 
 
@@ -105,24 +108,29 @@ func _new_movement():
 
 
 func _on_hurt_box_hurt(damage: int):
-	if is_alive:
-		hp -= damage
-		if hp <= 0:
-			die()
-			return
-		health_bar.update_health_bar(hp)
+	if is_alive and is_multiplayer_authority():
+		rpc("get_damage", damage)
 
 
+@rpc("call_local")
+func get_damage(damage: int):
+	hp -= damage
+	if hp <= 0 and is_multiplayer_authority():
+		rpc("die")
+		return
+	health_bar.update_health_bar(hp)
+
+
+@rpc("call_local")
 func die():
-		is_alive = false
-		current_weapon.stop_shooting()
-		
-		# TODO: прятать все что связано с игроком
-		# в идеале дать возможность переключать камеру на других игроков
-		sprite.hide()
-		health_bar.hide()
-		$player_name_label.hide()
+	is_alive = false
+	current_weapon.stop_shooting()
 	
+	# TODO: прятать все что связано с игроком
+	# в идеале дать возможность переключать камеру на других игроков
+	sprite.hide()
+	health_bar.hide()
+	$player_name_label.hide()
 
 
 func set_player_name(new_name: String):

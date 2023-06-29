@@ -11,9 +11,9 @@
 script = ExtResource("5_6tvdj")
 enemy = ExtResource("4_ryvao")
 enemy_total_count = 100
-enemy_spawn_delay = 10.0
-enemy_count_escalating = 5
-enemy_first_wave_count = 10
+enemy_spawn_delay = 60.0
+enemy_count_escalating = 1
+enemy_first_wave_count = 1
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5mul0"]
 polygon = PackedVector2Array(-15, -15, 15, -15, 15, 15, -15, 15)
