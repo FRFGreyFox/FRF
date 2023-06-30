@@ -20,9 +20,21 @@ func _ready():
 	hit_box.set_damage(collision_damage)
 	health_bar.set_new_stylebox(hp_fill_style)
 	animation.play("walk")
+	update_visibility_for_players()
+
+
+func update_visibility_for_players():
 	if target_player.player_id != multiplayer.get_unique_id():
 		modulate.a = 0.5
 		health_bar.hide()
+	else:
+		modulate.a = 1.0
+		health_bar.show()
+
+
+func update_target_player(new_player: CharacterBody2D):
+	target_player = new_player
+	update_visibility_for_players()
 
 
 @rpc

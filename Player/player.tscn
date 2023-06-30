@@ -103,7 +103,6 @@ offset_right = 577.0
 offset_bottom = 323.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(-0.5, 14.5)
 scale = Vector2(0.735352, 0.774414)
 energy = 0.5
@@ -115,5 +114,6 @@ visible = false
 texture = ExtResource("8_4uxso")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="exit_pressed" from="IngameMainMenu" to="." method="_on_ingame_main_menu_exit_pressed"]
 
 [editable path="HurtBox"]

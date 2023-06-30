@@ -59,11 +59,12 @@ func _physics_process(_delta):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("ingame_menu"):
-		if ingame_menu.visible:
-			ingame_menu.hide()
-		else:
-			ingame_menu.show()
+	if is_multiplayer_authority():
+		if Input.is_action_just_pressed("ingame_menu"):
+			if ingame_menu.visible:
+				ingame_menu.hide()
+			else:
+				ingame_menu.show()
 
 
 func _new_angle():
@@ -139,3 +140,21 @@ func set_player_name(new_name: String):
 
 func _end_game(is_loose: bool):
 	endgame_menu.show()
+ 
+
+@rpc
+func player_exited():
+	gamestate.current_world_scene.player_exited(self)
+	queue_free()
+
+
+func _on_ingame_main_menu_exit_pressed():
+	rpc("player_exited")
+	
+	# Отключаем от сервера
+	multiplayer.set_multiplayer_peer(null)
+	
+	# Грузим главное меню, очищаем ссостояние игры.
+	var main_menu = load("res://Levels/Menues/MainMenu.tscn").instantiate()
+	get_tree().get_root().add_child(main_menu)
+	gamestate.current_world_scene.queue_free()
