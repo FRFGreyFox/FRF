@@ -68,6 +68,7 @@ func _process(delta):
 
 
 func _new_angle():
+	"""Расчет угла поворота персонажа. Угол вычесляется на основе позиции мышки игрока."""
 	if is_multiplayer_authority():
 		angle = global_position.direction_to(get_global_mouse_position()).angle()
 		rpc("_update_angle", angle)
@@ -115,6 +116,7 @@ func _on_hurt_box_hurt(damage: int):
 
 @rpc("call_local")
 func get_damage(damage: int):
+	"""Обработчик получения урона. Вызывается локально и глобально, что-бы данные о hp были консистенты везде."""
 	hp -= damage
 	if hp <= 0 and is_multiplayer_authority():
 		rpc("die")
@@ -124,7 +126,13 @@ func get_damage(damage: int):
 
 @rpc("call_local")
 func die():
+	"""
+	Обработчик смерти игрока.
+	 Вызывается локально и глобально, что-бы все клиенты получили инфу о смерти определенного игрока.
+	"""
 	is_alive = false
+	
+	# Останавливаем атоатаку.
 	current_weapon.stop_shooting()
 	
 	# TODO: прятать все что связано с игроком
@@ -144,11 +152,20 @@ func _end_game(is_loose: bool):
 
 @rpc
 func player_exited():
+	"""
+	Обработчки выхода игрока.
+	 Вызывается только на других клиентах, т.к. локально игра сбрасывает всё состояние.
+	"""
+	# Сообщаем миру игры который игрок вышел.
 	gamestate.current_world_scene.player_exited(self)
+	
+	# Удаляем игрока.
 	queue_free()
 
 
 func _on_ingame_main_menu_exit_pressed():
+	"""Ловит нажатие игроком любую из кнопок выхода для дальнейшей обработки на сервере и клиентах."""
+	# Сообщаем остальным что игрок вышел.
 	rpc("player_exited")
 	
 	# Отключаем от сервера
