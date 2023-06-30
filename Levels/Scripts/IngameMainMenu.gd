@@ -3,12 +3,15 @@ extends Control
 @onready var ingame_panel = $IngameMainPanel
 @onready var settings_panel = $SettingsMenu
 
+signal exit_pressed()
+
 
 func _on_return_pressed():
 	hide()
 
 
 func _on_exit_game_pressed():
+	emit_signal("exit_pressed")
 	get_tree().quit()
 
 
@@ -19,8 +22,4 @@ func _on_settings_pressed():
 
 
 func _on_exit_main_menu_pressed():
-	multiplayer.set_multiplayer_peer(null)
-	var main_menu = load("res://Levels/Menues/MainMenu.tscn").instantiate()
-	get_tree().get_root().add_child(main_menu)
-	gamestate.current_world_scene.queue_free()
-	queue_free()
+	emit_signal("exit_pressed")

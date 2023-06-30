@@ -38,3 +38,13 @@ func _on_players_life_check_timer_timeout():
 			died_players_counter += 1
 	if players_.size() == died_players_counter:
 		emit_signal("game_ended", true)
+
+
+func player_exited(exited_player: CharacterBody2D):
+	var new_enemy_target_player
+	for player in players.get_children():
+		if player != exited_player:
+			new_enemy_target_player = player
+			break
+	for enemy in enemies.get_children():
+		enemy.update_target_player(new_enemy_target_player)
