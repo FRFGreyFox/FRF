@@ -28,6 +28,7 @@ _data = {
 [node name="Bullet1" type="Node2D"]
 script = ExtResource("1_h4dye")
 damage = 50
+life_time = 1.0
 
 [node name="LifeTimer" type="Timer" parent="."]
 autostart = true

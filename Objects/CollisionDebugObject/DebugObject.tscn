@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://3gdpjqsngmb2"]
+
+[ext_resource type="Texture2D" uid="uid://g4utf3rbjo3p" path="res://Resources/Sprites/caster.png" id="1_wt7mf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8s3kj"]
+size = Vector2(64, 64)
+
+[node name="DebugObject" type="StaticBody2D"]
+collision_layer = 4294967295
+collision_mask = 4294967295
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_wt7mf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8s3kj")

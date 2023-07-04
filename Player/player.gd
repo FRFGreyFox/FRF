@@ -29,7 +29,10 @@ func _ready():
 	add_child(current_weapon)
 	if player_id == multiplayer.get_unique_id():
 		$Camera2D.make_current()
-	gamestate.current_world_scene.connect("game_ended", _end_game)
+
+
+func stop_shooting():
+	current_weapon.stop_shooting()
 
 
 func set_player_id(id: int):

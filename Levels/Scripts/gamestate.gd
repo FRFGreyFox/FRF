@@ -1,6 +1,5 @@
 extends Node
 
-# Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
@@ -12,7 +11,7 @@ signal game_error(what)
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
 const DEFAULT_PORT = 10567
 
-# Max number of players.
+# Max number of players. 1 + MAX_PEERS
 const MAX_PEERS = 3
 
 var peer = null
@@ -26,13 +25,15 @@ var players_ready = []
 
 var current_world_scene
 
+var players_objs: Dictionary
+
 
 func _ready():
-	multiplayer.connect("peer_connected", Callable(self, "_player_connected"))
-	multiplayer.connect("peer_disconnected", Callable(self, "_player_disconnected"))
-	multiplayer.connect("connected_to_server", Callable(self, "_connected_ok"))
-	multiplayer.connect("connection_failed", Callable(self, "_connected_fail"))
-	multiplayer.connect("server_disconnected", Callable(self, "_server_disconnected"))
+	multiplayer.connect("peer_connected", _player_connected)
+	multiplayer.connect("peer_disconnected", _player_disconnected)
+	multiplayer.connect("connected_to_server", _connected_ok)
+	multiplayer.connect("connection_failed", _connected_fail)
+	multiplayer.connect("server_disconnected", _server_disconnected)
 
 
 @rpc("call_remote") func _disconnect(id):
@@ -42,7 +43,7 @@ func _ready():
 
 # Callback from SceneTree.
 func _player_connected(id):
-	rpc_id(id, "register_player", player_name)
+	load_new_player(id)
 
 
 # Callback from SceneTree.
@@ -53,12 +54,12 @@ func _player_disconnected(id):
 			end_game()
 	else: # Game is not in progress.
 		# Unregister this player.
-		unregister_player(id)
+		#unregister_player(id)
+		pass
 
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok():
-	#return
 	# We just connected to a server
 	emit_signal("connection_succeeded")
 
@@ -75,18 +76,7 @@ func _connected_fail():
 	emit_signal("connection_failed")
 
 
-@rpc("any_peer") func register_player(new_player_name: String):
-	var id = multiplayer.get_remote_sender_id()
-	self.players[id] = new_player_name
-	emit_signal("player_list_changed")
-
-
-@rpc("any_peer") func unregister_player(id):
-	players.erase(id)
-	emit_signal("player_list_changed")
-
-
-@rpc("any_peer") func pre_start_game(spawn_points):
+@rpc("call_local") func pre_start_game(spawn_points):
 	# Change scene.
 	current_world_scene = load("res://Levels/Scenes/endless.tscn").instantiate()
 	get_tree().get_root().add_child(current_world_scene)
@@ -122,7 +112,7 @@ func _connected_fail():
 		players_ready.append(id)
 
 
-func host_game(new_player_name):
+func start_server(new_player_name):
 	player_name = new_player_name
 	peer = ENetMultiplayerPeer.new()
 	peer.create_server(DEFAULT_PORT, MAX_PEERS)
@@ -167,3 +157,62 @@ func end_game():
 
 	emit_signal("game_ended")
 	players.clear()
+	
+	
+	# Change scene.
+	#current_world_scene = load("res://Levels/Scenes/endless.tscn").instantiate()
+	#get_tree().get_root().add_child(current_world_scene)
+	#get_tree().get_root().get_node("lobby").hide()
+	#var player_scene = load("res://Player/player.tscn")
+	#var collision_index = 1
+	#for p_id in spawn_points:
+	#	var player = player_scene.instantiate()
+	#	player.collision_layer = collision_index
+	#	player.collision_mask = collision_index
+	#	collision_index += 1
+	#	player.set_name(str(p_id)) # Use unique ID as node name.
+	#	player.position = current_world_scene.get_node(
+	#		"PlayersSpawnPoints/" + str(spawn_points[p_id])
+	#	).position
+	#	player.set_multiplayer_authority(p_id) # Set unique id as master.
+	#	if p_id == multiplayer.get_unique_id():
+	#		# If node for this peer id, set name.
+	#		player.set_player_name(player_name)
+	#	else:
+	#		# Otherwise set name from peer.
+	#		player.set_player_name(self.players[p_id])
+	#	player.set_player_id(p_id)
+	#	current_world_scene.get_node("Players").add_child(player)
+	#if not multiplayer.is_server():
+		#rpc_id(1, "ready_to_start", multiplayer.get_unique_id())
+
+
+func load_current_world_scene():
+	"""Прогружаем ресурс лобби и отрисовываем его."""
+	current_world_scene = load("res://Levels/Scenes/Hub.tscn").instantiate()
+	get_tree().get_root().add_child(current_world_scene)
+
+
+func load_hub_server():
+	"""Загрузка хаба."""
+	load_current_world_scene()
+	load_new_player(1)
+
+func load_hub_client():
+	load_current_world_scene()
+	var player_id = multiplayer.get_unique_id()
+	load_new_player(multiplayer.get_unique_id())
+
+
+func load_new_player(player_id: int):
+	var player = load("res://Player/player.tscn").instantiate()
+	player.set_name(str(player_id))
+	player.player_id = player_id
+	current_world_scene.get_node("Players").add_child(player)
+	player.stop_shooting()
+	player.set_multiplayer_authority(player_id)
+	var players_size = players.size()
+	player.position = current_world_scene.get_node("PlayersSpawnPoints/" + str(players_size)).position
+	players[player_id] = player
+	player.set_player_id(player_id)
+	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciu6hsih6jdm0"
-path="res://.godot/imported/sMap2.png-cfee715bca6959bf4b4bcf27bf38829a.ctex"
+uid="uid://b5ee214wcygf2"
+path="res://.godot/imported/Spearwoman-Sheet.png-90c1b31e8e3debeb9b68e2d8923549a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/sMap2.png"
-dest_files=["res://.godot/imported/sMap2.png-cfee715bca6959bf4b4bcf27bf38829a.ctex"]
+source_file="res://Resources/Sprites/Spearwoman/Spearwoman-Sheet.png"
+dest_files=["res://.godot/imported/Spearwoman-Sheet.png-90c1b31e8e3debeb9b68e2d8923549a5.ctex"]
 
 [params]
 

@@ -39,7 +39,7 @@ _data = {
 radius = 30.0
 height = 65.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_872t5")

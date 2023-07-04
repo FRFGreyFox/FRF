@@ -5,10 +5,10 @@ class_name Base_bullet
 @onready var life_timer = $LifeTimer
 @onready var hit_box = $HitBox
 
-@export var damage: int = 1
-@export var life_time: float = 5.0
+@export_range(0, 10000, 1) var damage: int = 1
+@export_range(0.1, 10000, 0.01) var life_time: float = 5.0
 @export var speed: float = 450.0
-@export var through_limit: int = 1
+@export_range(1, 10000, 1) var through_limit: int = 1
 
 var current_through: int = 0
 
