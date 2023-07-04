@@ -92,6 +92,128 @@ language = "ru_RU"
 visible = false
 layout_mode = 1
 
+[node name="ConnectMenu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33
+anchor_top = 0.364
+anchor_right = 0.673
+anchor_bottom = 0.637
+offset_left = -0.160004
+offset_top = 0.127991
+offset_right = -0.296021
+offset_bottom = 0.223999
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ErrorLabel" type="Label" parent="ConnectMenu"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 123.0
+offset_right = 367.0
+offset_bottom = 155.0
+
+[node name="PlayerNameZone" type="ReferenceRect" parent="ConnectMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.25
+border_width = 0.0
+
+[node name="NameLabel" type="Label" parent="ConnectMenu/PlayerNameZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.1
+anchor_right = 0.48
+anchor_bottom = 0.9
+text = "имя игрока"
+horizontal_alignment = 1
+vertical_alignment = 1
+language = "ru_RU"
+
+[node name="Name" type="LineEdit" parent="ConnectMenu/PlayerNameZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.52
+anchor_top = 0.1
+anchor_right = 0.98
+anchor_bottom = 0.9
+text = "Player"
+
+[node name="IPHostZone" type="ReferenceRect" parent="ConnectMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.5
+border_width = 0.0
+
+[node name="IPLabel" type="Label" parent="ConnectMenu/IPHostZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.1
+anchor_right = 0.48
+anchor_bottom = 0.9
+text = "IP сервера"
+horizontal_alignment = 1
+vertical_alignment = 1
+language = "ru_RU"
+
+[node name="IP" type="LineEdit" parent="ConnectMenu/IPHostZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.52
+anchor_top = 0.1
+anchor_right = 0.98
+anchor_bottom = 0.9
+text = "127.0.0.1"
+
+[node name="HSeparator" type="HSeparator" parent="ConnectMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="ButtonsZone" type="ReferenceRect" parent="ConnectMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+border_width = 0.0
+
+[node name="Host" type="Button" parent="ConnectMenu/ButtonsZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.4
+anchor_bottom = 0.5
+text = "сервер"
+
+[node name="Join" type="Button" parent="ConnectMenu/ButtonsZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.5
+text = "подключиться"
+
+[node name="BackButton" type="Button" parent="ConnectMenu/ButtonsZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.55
+anchor_right = 0.6
+anchor_bottom = 0.9
+text = "назад"
+language = "ru_RU"
+
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ir8ub")
 autoplay = true
@@ -100,3 +222,6 @@ bus = &"Music"
 [connection signal="pressed" from="MainPanel/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MainPanel/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainPanel/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ConnectMenu/ButtonsZone/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="ConnectMenu/ButtonsZone/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="ConnectMenu/ButtonsZone/BackButton" to="." method="_on_button_pressed"]

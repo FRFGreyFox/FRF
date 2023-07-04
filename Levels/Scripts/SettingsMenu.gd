@@ -99,7 +99,6 @@ func _on_apply_button_pressed():
 	save_label_timer.stop()
 	save_label.modulate.a = 1
 	save_label.show()
-	save_label_timer.start()
 	
 	_update_display_mode(display_mode.selected)
 	
@@ -117,6 +116,8 @@ func _on_apply_button_pressed():
 	
 	# Сохранение VSYNC
 	settings.save_config("display", "vsync", vsync_mode.selected)
+	
+	save_label_timer.start()
 
 
 func _on_save_label_timer_timeout():

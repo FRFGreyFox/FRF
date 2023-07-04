@@ -84,7 +84,7 @@ func refresh_lobby():
 	var players = gamestate.get_player_list()
 	players.sort()
 	players_list.clear()
-	players_list.add_item(gamestate.get_player_name() + " (You)")
+	players_list.add_item(gamestate.get_player_name() + " (Вы)")
 	for player in players:
 		players_list.add_item(player)
 	players_start.disabled = not multiplayer.is_server()

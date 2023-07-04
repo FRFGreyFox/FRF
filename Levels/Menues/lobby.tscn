@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bornr16h232qk"]
 
-[ext_resource type="Script" path="res://Levels/Scripts/lobby.gd" id="1_8dpna"]
+[ext_resource type="Script" path="res://Levels/Scripts/lobby.gd" id="1_s3vem"]
 
 [node name="lobby" type="Control"]
 layout_mode = 3
@@ -13,7 +13,7 @@ offset_right = 4.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_8dpna")
+script = ExtResource("1_s3vem")
 
 [node name="Players" type="Panel" parent="."]
 visible = false
