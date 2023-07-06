@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name BasicWave
+class_name BaseWave
 
 @export var spawn_info: Spawn_info
 

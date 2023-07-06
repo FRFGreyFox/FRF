@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://d04vlom7ley3d"]
 
-[ext_resource type="Script" path="res://Weapons/base_weapon.gd" id="1_6xnx1"]
-[ext_resource type="PackedScene" uid="uid://fdobh1palu5a" path="res://Weapons/Bullets/Bullet1/Bullet1.tscn" id="2_rnf0r"]
+[ext_resource type="Script" path="res://Weapons/BaseWeapon.gd" id="1_7axfh"]
+[ext_resource type="PackedScene" uid="uid://fdobh1palu5a" path="res://Weapons/Bullets/Bullet1/Bullet1.tscn" id="2_ffe0s"]
 
 [node name="Weapon1" type="Node2D"]
-script = ExtResource("1_6xnx1")
-bullet = ExtResource("2_rnf0r")
+script = ExtResource("1_7axfh")
+bullet = ExtResource("2_ffe0s")
 
 [node name="AttackTimer" type="Timer" parent="."]
 autostart = true

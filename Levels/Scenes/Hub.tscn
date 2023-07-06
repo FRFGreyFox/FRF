@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c77ie4cl4n5xc"]
 
-[ext_resource type="Script" path="res://Levels/Scripts/NewLobby.gd" id="1_xm3uo"]
+[ext_resource type="Script" path="res://Levels/Scripts/Hub.gd" id="1_2ue8t"]
 [ext_resource type="Texture2D" uid="uid://boy3yql7d7ymh" path="res://Resources/Sprites/lobby_background.jpg" id="2_u3vcp"]
 [ext_resource type="PackedScene" uid="uid://3gdpjqsngmb2" path="res://Objects/CollisionDebugObject/DebugObject.tscn" id="3_mmnot"]
 [ext_resource type="AudioStream" uid="uid://dq3n2w4urwub2" path="res://Resources/Sounds/BackgroundMusic/LobbyBackgroundMusic.mp3" id="4_rcn81"]
@@ -9,7 +9,15 @@
 size = Vector2(134, 132)
 
 [node name="Hub" type="Node2D"]
-script = ExtResource("1_xm3uo")
+script = ExtResource("1_2ue8t")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.670588, 0.670588, 0.670588, 1)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rcn81")
+autoplay = true
+bus = &"Music"
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 3
@@ -17,8 +25,38 @@ texture = ExtResource("2_u3vcp")
 region_enabled = true
 region_rect = Rect2(0, 0, 1500, 1500)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.670588, 0.670588, 0.670588, 1)
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="HostArea" type="Area2D" parent="Zones"]
+
+[node name="HostZone" type="CollisionShape2D" parent="Zones/HostArea"]
+position = Vector2(-617, -628)
+shape = SubResource("RectangleShape2D_x34ng")
+debug_color = Color(0.615686, 0.537255, 0, 0.419608)
+
+[node name="PlayersSpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(-150, 0)
+
+[node name="1" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(150, 0)
+
+[node name="2" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, 150)
+
+[node name="3" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, -150)
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="NPCs"]
+
+[node name="Allies" type="Node2D" parent="NPCs"]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Players" type="Node2D" parent="."]
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -307,35 +345,5 @@ position = Vector2(131, 750)
 
 [node name="69" parent="Objects/DebugWall/Botton" instance=ExtResource("3_mmnot")]
 position = Vector2(66, 750)
-
-[node name="PlayersSpawnPoints" type="Node2D" parent="."]
-
-[node name="0" type="Marker2D" parent="PlayersSpawnPoints"]
-position = Vector2(-150, 0)
-
-[node name="1" type="Marker2D" parent="PlayersSpawnPoints"]
-position = Vector2(150, 0)
-
-[node name="2" type="Marker2D" parent="PlayersSpawnPoints"]
-position = Vector2(0, 150)
-
-[node name="3" type="Marker2D" parent="PlayersSpawnPoints"]
-position = Vector2(0, -150)
-
-[node name="Players" type="Node2D" parent="."]
-
-[node name="Zones" type="Node2D" parent="."]
-
-[node name="HostArea" type="Area2D" parent="Zones"]
-
-[node name="HostZone" type="CollisionShape2D" parent="Zones/HostArea"]
-position = Vector2(-617, -628)
-shape = SubResource("RectangleShape2D_x34ng")
-debug_color = Color(0.615686, 0.537255, 0, 0.419608)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_rcn81")
-autoplay = true
-bus = &"Music"
 
 [connection signal="body_entered" from="Zones/HostArea" to="." method="_on_host_area_body_entered"]

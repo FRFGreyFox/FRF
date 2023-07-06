@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://cykknhcy4w68e"]
+
+[ext_resource type="Script" path="res://Levels/Scripts/BaseLevel.gd" id="1_djbw2"]
+[ext_resource type="PackedScene" uid="uid://c803vilt0ht5k" path="res://Stages/Scenes/Stage_1/Levels/Level_2/Level_2.tscn" id="2_lsjrn"]
+[ext_resource type="PackedScene" uid="uid://bagdxvw8f2mmk" path="res://Stages/Scenes/Stage_1/Levels/Level_3/Level_3.tscn" id="3_hpml6"]
+
+[node name="Level_1" type="Node2D"]
+script = ExtResource("1_djbw2")
+next_levels = Array[Resource]([ExtResource("2_lsjrn"), ExtResource("3_hpml6")])

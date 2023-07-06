@@ -17,7 +17,6 @@ func _ready():
 	# Called every time the node is added to the scene.
 	gamestate.connect("connection_failed", Callable(self, "_on_connection_failed"))
 	gamestate.connect("connection_succeeded", Callable(self, "_on_connection_success"))
-	gamestate.connect("player_list_changed", Callable(self, "refresh_lobby"))
 	gamestate.connect("game_ended", Callable(self, "_on_game_ended"))
 	gamestate.connect("game_error", Callable(self, "_on_game_error"))
 	# Set the player name according to the system username. Fallback to the path.
@@ -39,7 +38,7 @@ func _on_host_pressed():
 	if not _check_player_name(connect_name.text):
 		return
 	gamestate.start_server(connect_name.text)
-	gamestate.load_hub_server()
+	gamestate.load_hub_server(connect_name.text)
 	queue_free()
 
 
@@ -73,5 +72,5 @@ func _on_join_pressed():
 		return
 
 	gamestate.join_game(ip, connect_name.text)
-	gamestate.load_hub_client()
+	gamestate.load_hub_client(connect_name.text)
 	queue_free()

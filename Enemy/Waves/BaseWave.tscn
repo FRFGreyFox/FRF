@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://1g515kp1r0sn"]
 
-[ext_resource type="Script" path="res://Enemy/Waves/basic_wave.gd" id="1_jc2dq"]
+[ext_resource type="Script" path="res://Enemy/Waves/BaseWave.gd" id="1_u6rlw"]
 
-[node name="BasicWave" type="Node2D"]
-script = ExtResource("1_jc2dq")
+[node name="BaseWave" type="Node2D"]
+script = ExtResource("1_u6rlw")
 
 [node name="spawn_timer" type="Timer" parent="."]
 wait_time = 0.5
