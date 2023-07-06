@@ -1,6 +1,5 @@
 extends Node
 
-signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
@@ -22,6 +21,7 @@ var player_name = "Player"
 # Names for remote players in id:name format.
 var players = {}
 var players_ready = []
+var player_names = {}
 
 var current_world_scene
 
@@ -43,7 +43,15 @@ func _ready():
 
 # Callback from SceneTree.
 func _player_connected(id):
+	rpc_id(id, "register_player", player_name)
 	load_new_player(id)
+
+
+@rpc("any_peer") 
+func register_player(new_player_name: String):
+	var id = multiplayer.get_remote_sender_id()
+	player_names[id] = new_player_name
+	players[id].set_player_name(new_player_name)
 
 
 # Callback from SceneTree.
@@ -60,6 +68,9 @@ func _player_disconnected(id):
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok():
+	var player_id = multiplayer.get_unique_id()
+	player_names[player_id] = player_name
+	rpc("update_player_names", player_id, player_name)
 	# We just connected to a server
 	emit_signal("connection_succeeded")
 
@@ -112,14 +123,15 @@ func _connected_fail():
 		players_ready.append(id)
 
 
-func start_server(new_player_name):
+func start_server(new_player_name: String):
 	player_name = new_player_name
 	peer = ENetMultiplayerPeer.new()
 	peer.create_server(DEFAULT_PORT, MAX_PEERS)
 	multiplayer.set_multiplayer_peer(peer)
+	player_names[1] = new_player_name
 
 
-func join_game(ip, new_player_name):
+func join_game(ip: String, new_player_name: String):
 	player_name = new_player_name
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(ip, DEFAULT_PORT)
@@ -157,34 +169,6 @@ func end_game():
 
 	emit_signal("game_ended")
 	players.clear()
-	
-	
-	# Change scene.
-	#current_world_scene = load("res://Levels/Scenes/endless.tscn").instantiate()
-	#get_tree().get_root().add_child(current_world_scene)
-	#get_tree().get_root().get_node("lobby").hide()
-	#var player_scene = load("res://Player/player.tscn")
-	#var collision_index = 1
-	#for p_id in spawn_points:
-	#	var player = player_scene.instantiate()
-	#	player.collision_layer = collision_index
-	#	player.collision_mask = collision_index
-	#	collision_index += 1
-	#	player.set_name(str(p_id)) # Use unique ID as node name.
-	#	player.position = current_world_scene.get_node(
-	#		"PlayersSpawnPoints/" + str(spawn_points[p_id])
-	#	).position
-	#	player.set_multiplayer_authority(p_id) # Set unique id as master.
-	#	if p_id == multiplayer.get_unique_id():
-	#		# If node for this peer id, set name.
-	#		player.set_player_name(player_name)
-	#	else:
-	#		# Otherwise set name from peer.
-	#		player.set_player_name(self.players[p_id])
-	#	player.set_player_id(p_id)
-	#	current_world_scene.get_node("Players").add_child(player)
-	#if not multiplayer.is_server():
-		#rpc_id(1, "ready_to_start", multiplayer.get_unique_id())
 
 
 func load_current_world_scene():
@@ -193,26 +177,32 @@ func load_current_world_scene():
 	get_tree().get_root().add_child(current_world_scene)
 
 
-func load_hub_server():
-	"""Загрузка хаба."""
+func load_hub_server(new_player_name: String):
 	load_current_world_scene()
-	load_new_player(1)
+	var self_player = load_new_player(1)
+	self_player.set_player_name(new_player_name)
 
-func load_hub_client():
+
+func load_hub_client(new_player_name: String):
 	load_current_world_scene()
 	var player_id = multiplayer.get_unique_id()
-	load_new_player(multiplayer.get_unique_id())
+	player_names[player_id] = new_player_name
+	var self_player = load_new_player(multiplayer.get_unique_id())
+	self_player.set_player_name(new_player_name)
 
 
 func load_new_player(player_id: int):
 	var player = load("res://Player/player.tscn").instantiate()
 	player.set_name(str(player_id))
-	player.player_id = player_id
-	current_world_scene.get_node("Players").add_child(player)
+	player.set_player_id(player_id)
+	current_world_scene.spawn_player(player)
 	player.stop_shooting()
 	player.set_multiplayer_authority(player_id)
-	var players_size = players.size()
-	player.position = current_world_scene.get_node("PlayersSpawnPoints/" + str(players_size)).position
 	players[player_id] = player
 	player.set_player_id(player_id)
-	
+	return player
+
+
+@rpc("any_peer", "call_local")
+func update_player_names(player_id, new_name):
+	player_names[player_id] = new_name

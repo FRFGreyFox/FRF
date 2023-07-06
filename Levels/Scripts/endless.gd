@@ -7,7 +7,7 @@ extends Node2D
 @onready var players = $Players
 @onready var players_bullets = $PlayersBullets
 
-var current_wave: BasicWave
+var current_wave: BaseWave
 
 signal game_ended(is_loose)
 

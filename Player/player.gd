@@ -18,7 +18,7 @@ extends CharacterBody2D
 var puppet_pos = Vector2()
 var puppet_motion = Vector2()
 var hp = 50
-var current_weapon: Base_Weapon
+var current_weapon: BaseWeapon
 var angle: float
 var puppet_angle : float
 var is_alive: bool = true
@@ -39,7 +39,7 @@ func set_player_id(id: int):
 	player_id = id
 
 
-func set_new_weapon(new_weapon: Base_Weapon):
+func set_new_weapon(new_weapon: BaseWeapon):
 	current_weapon.queue_free()
 	current_weapon = new_weapon
 

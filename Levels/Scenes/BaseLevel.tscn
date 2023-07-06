@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://co3pkg8udt5y5"]
+
+[ext_resource type="Script" path="res://Levels/Scripts/BaseLevel.gd" id="1_ytsqq"]
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_ytsqq")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+
+[node name="Background" type="Sprite2D" parent="."]
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="PlayersSpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(-150, 0)
+
+[node name="1" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(150, 0)
+
+[node name="2" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, 150)
+
+[node name="3" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, -150)
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="NPCs"]
+
+[node name="Allies" type="Node2D" parent="NPCs"]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Objects" type="Node2D" parent="."]

@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Base_bullet
+class_name BaseBullet
 
 @onready var life_timer = $LifeTimer
 @onready var hit_box = $HitBox

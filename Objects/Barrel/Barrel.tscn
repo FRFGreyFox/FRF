@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1j2nodig7rei"]
+[gd_scene load_steps=5 format=3 uid="uid://c1j2nodig7rei"]
 
-[ext_resource type="Texture2D" uid="uid://bx1p86ttoq3gn" path="res://Resources/Sprites/barrel.png" id="1_mne6l"]
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_7im8o"]
+[ext_resource type="Texture2D" uid="uid://bx1p86ttoq3gn" path="res://Resources/Sprites/barrel.png" id="2_q68nv"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b2lqg"]
 cull_mode = 2
@@ -9,11 +10,12 @@ polygon = PackedVector2Array(-34.5882, -190.235, 60.5294, -190.235, 112.412, -15
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdt3s"]
 size = Vector2(32, 41)
 
-[node name="TestObject" type="StaticBody2D"]
+[node name="Barrel" type="StaticBody2D"]
+script = ExtResource("1_7im8o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.115646, 0.115646)
-texture = ExtResource("1_mne6l")
+texture = ExtResource("2_q68nv")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
 occluder = SubResource("OccluderPolygon2D_b2lqg")

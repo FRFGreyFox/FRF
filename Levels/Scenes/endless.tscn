@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/Scripts/endless.gd" id="1_apguw"]
 [ext_resource type="Texture2D" uid="uid://mp4c0c64o5vb" path="res://Resources/Sprites/default_background.png" id="2_nstp7"]
-[ext_resource type="PackedScene" uid="uid://1g515kp1r0sn" path="res://Enemy/Waves/basic_wave.tscn" id="3_4d462"]
+[ext_resource type="PackedScene" uid="uid://1g515kp1r0sn" path="res://Enemy/Waves/BaseWave.tscn" id="3_4d462"]
 [ext_resource type="PackedScene" uid="uid://dpq5tvydnvgi6" path="res://Enemy/Waves/Wave_1/EnemyHarchagoul.tscn" id="4_ryvao"]
 [ext_resource type="Script" path="res://Enemy/Spawn/spawn_info.gd" id="5_6tvdj"]
 

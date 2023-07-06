@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dd2p5dl7r6v8v"]
 
-[ext_resource type="Script" path="res://Weapons/base_weapon.gd" id="1_0ipye"]
+[ext_resource type="Script" path="res://Weapons/BaseWeapon.gd" id="1_rdqs8"]
 
 [node name="BaseWeapon" type="Node2D"]
-script = ExtResource("1_0ipye")
+script = ExtResource("1_rdqs8")
 
 [node name="AttackTimer" type="Timer" parent="."]
 autostart = true

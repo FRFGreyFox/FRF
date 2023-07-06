@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Base_Weapon
+class_name BaseWeapon
 
 @export var bullet: Resource
 @export var rate_of_fire: float = 1.0
