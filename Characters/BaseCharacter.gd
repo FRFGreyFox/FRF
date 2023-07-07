@@ -36,6 +36,10 @@ func stop_shooting() -> void:
 	current_weapon.stop_shooting()
 
 
+func start_shooting() -> void:
+	current_weapon.start_shooting()
+
+
 func set_new_weapon(new_weapon: BaseWeapon) -> void:
 	current_weapon.queue_free()
 	current_weapon = new_weapon

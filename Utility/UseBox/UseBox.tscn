@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmyob7bar13cd"]
+
+[ext_resource type="Script" path="res://Utility/UseBox/UseBox.gd" id="1_lso0h"]
+
+[node name="UseBox" type="Area2D"]
+script = ExtResource("1_lso0h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

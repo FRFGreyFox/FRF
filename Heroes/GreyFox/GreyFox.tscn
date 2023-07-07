@@ -31,9 +31,9 @@ _data = {
 "walk": SubResource("Animation_2t058")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b5bmx"]
-radius = 31.0
-height = 66.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fihar"]
+radius = 30.0
+height = 68.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swq8a"]
 radius = 30.0
@@ -64,12 +64,10 @@ libraries = {
 [node name="HurtBox" parent="." groups=["player"] instance=ExtResource("4_hx2sb")]
 collision_layer = 2
 collision_mask = 2
-HurtBoxType = 0
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(2, 9)
-rotation = 0.523599
-shape = SubResource("CapsuleShape2D_b5bmx")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(2, 10)
+shape = SubResource("CapsuleShape2D_fihar")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, 9)
@@ -82,6 +80,7 @@ texture = ExtResource("5_r23b2")
 hframes = 6
 
 [node name="PhisicCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(2, 9)
 rotation = 0.523598
 shape = SubResource("CapsuleShape2D_swq8a")

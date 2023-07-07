@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8tr80m36tcit"]
+
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_jj6my"]
+[ext_resource type="Texture2D" uid="uid://g4utf3rbjo3p" path="res://Resources/Sprites/caster.png" id="2_2xlq1"]
+[ext_resource type="PackedScene" uid="uid://dmyob7bar13cd" path="res://Utility/UseBox/UseBox.tscn" id="2_mc2nq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bijb1"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s1awk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ayvf6"]
+radius = 16.72
+height = 76.35
+
+[node name="DebugHubPc" type="StaticBody2D" node_paths=PackedStringArray("use_box")]
+script = ExtResource("1_jj6my")
+is_usable = true
+use_box = NodePath("UseBox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bijb1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2xlq1")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_s1awk")
+
+[node name="UseBox" parent="." instance=ExtResource("2_mc2nq")]
+position = Vector2(0, 1)
+
+[node name="UseCollisionZone" type="CollisionShape2D" parent="UseBox"]
+position = Vector2(0, 15.544)
+shape = SubResource("CapsuleShape2D_ayvf6")

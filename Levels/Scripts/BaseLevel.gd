@@ -15,8 +15,8 @@ class_name BaseLevel
 @export var next_levels: Array[Resource]
 @export_category("")
 
-@export_category("AdditionalSettings")
-@export_group("day-night")
+@export_category("Дополнительные настройки")
+@export_group("dat-night")
 @export var day_night_enabled: bool = false
 @export var day_color: Color = Color("#ffffff")
 @export var night_color: Color = Color("#091d3a")
