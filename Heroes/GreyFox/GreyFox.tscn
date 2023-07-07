@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4mdyrhcry5i4"]
+
+[ext_resource type="Script" path="res://Heroes/BaseHero.gd" id="1_8btf1"]
+[ext_resource type="Texture2D" uid="uid://pncjtak60r2y" path="res://Resources/Sprites/light.png" id="2_3c1l2"]
+[ext_resource type="PackedScene" uid="uid://d04vlom7ley3d" path="res://Weapons/Weapon1/Weapon1.tscn" id="2_8fvq1"]
+[ext_resource type="Texture2D" uid="uid://dr3xl843q45yq" path="res://Resources/Sprites/spot.png" id="3_holt1"]
+[ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/HurtBox/hurt_box.tscn" id="4_hx2sb"]
+[ext_resource type="Texture2D" uid="uid://n2516yij5air" path="res://Player/sGreyFoxRunAnim6.png" id="5_r23b2"]
+[ext_resource type="PackedScene" uid="uid://cadsa22r6nfef" path="res://Utility/HealthBar/HealthBar.tscn" id="6_ihb6r"]
+[ext_resource type="PackedScene" uid="uid://ci53v2ne7vabf" path="res://Levels/Menues/IngameMainMenu.tscn" id="7_mxugh"]
+[ext_resource type="PackedScene" uid="uid://byj3xpdmc5617" path="res://Levels/Menues/EndGameMenu.tscn" id="8_caygs"]
+
+[sub_resource type="Animation" id="Animation_2t058"]
+resource_name = "walk"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7, 0.9, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_06xe4"]
+_data = {
+"walk": SubResource("Animation_2t058")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b5bmx"]
+radius = 31.0
+height = 66.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swq8a"]
+radius = 30.0
+height = 65.0
+
+[node name="GreyFox" type="CharacterBody2D"]
+script = ExtResource("1_8btf1")
+max_hp = 50
+movement_speed = 200
+weapon_resource = ExtResource("2_8fvq1")
+
+[node name="PointLight" type="PointLight2D" parent="."]
+position = Vector2(-0.5, 14.5)
+scale = Vector2(0.735352, 0.774414)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("2_3c1l2")
+
+[node name="PointLightSprite" type="Sprite2D" parent="PointLight"]
+visible = false
+texture = ExtResource("3_holt1")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_06xe4")
+}
+
+[node name="HurtBox" parent="." groups=["player"] instance=ExtResource("4_hx2sb")]
+collision_layer = 2
+collision_mask = 2
+HurtBoxType = 0
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(2, 9)
+rotation = 0.523599
+shape = SubResource("CapsuleShape2D_b5bmx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2, 9)
+rotation = 0.523598
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 4.25)
+scale = Vector2(0.473, 0.5)
+texture = ExtResource("5_r23b2")
+hframes = 6
+
+[node name="PhisicCollision" type="CollisionShape2D" parent="."]
+position = Vector2(2, 9)
+rotation = 0.523598
+shape = SubResource("CapsuleShape2D_swq8a")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" parent="UI" instance=ExtResource("6_ihb6r")]
+layout_mode = 1
+offset_left = -18.0
+offset_top = -40.0
+offset_right = -18.0
+offset_bottom = -40.0
+scale = Vector2(0.5, 0.5)
+
+[node name="PlayerNameLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = -45.0
+offset_top = 36.0
+offset_right = 46.0
+offset_bottom = 62.0
+text = "Player"
+horizontal_alignment = 1
+
+[node name="IngameMainMenu" parent="UI" instance=ExtResource("7_mxugh")]
+visible = false
+layout_mode = 1
+offset_left = -575.0
+offset_top = -325.0
+offset_right = 577.0
+offset_bottom = 323.0
+
+[node name="EndGameMenu" parent="UI" instance=ExtResource("8_caygs")]
+visible = false
+layout_mode = 1
+offset_left = -575.0
+offset_top = -325.0
+offset_right = 577.0
+offset_bottom = 323.0
+
+[connection signal="main_menu_exit_pressed" from="UI/IngameMainMenu" to="." method="_on_ingame_main_menu_exit_pressed"]
+
+[editable path="HurtBox"]

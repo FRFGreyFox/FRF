@@ -4,6 +4,7 @@ extends Control
 @onready var settings_panel = $SettingsMenu
 
 signal exit_pressed()
+signal main_menu_exit_pressed()
 
 
 func _on_return_pressed():
@@ -22,4 +23,4 @@ func _on_settings_pressed():
 
 
 func _on_exit_main_menu_pressed():
-	emit_signal("exit_pressed")
+	emit_signal("main_menu_exit_pressed")

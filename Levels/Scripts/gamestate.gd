@@ -192,11 +192,10 @@ func load_hub_client(new_player_name: String):
 
 
 func load_new_player(player_id: int):
-	var player = load("res://Player/player.tscn").instantiate()
+	var player = load("res://Heroes/GreyFox/GreyFox.tscn").instantiate()
 	player.set_name(str(player_id))
 	player.set_player_id(player_id)
 	current_world_scene.spawn_player(player)
-	player.stop_shooting()
 	player.set_multiplayer_authority(player_id)
 	players[player_id] = player
 	player.set_player_id(player_id)
