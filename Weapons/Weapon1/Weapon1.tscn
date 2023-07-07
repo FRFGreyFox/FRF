@@ -6,6 +6,7 @@
 [node name="Weapon1" type="Node2D"]
 script = ExtResource("1_7axfh")
 bullet = ExtResource("2_ffe0s")
+rate_of_fire = 0.5
 
 [node name="AttackTimer" type="Timer" parent="."]
 autostart = true

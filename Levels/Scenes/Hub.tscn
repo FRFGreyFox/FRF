@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c77ie4cl4n5xc"]
+[gd_scene load_steps=8 format=3 uid="uid://c77ie4cl4n5xc"]
 
 [ext_resource type="Script" path="res://Levels/Scripts/Hub.gd" id="1_2ue8t"]
 [ext_resource type="Texture2D" uid="uid://boy3yql7d7ymh" path="res://Resources/Sprites/lobby_background.jpg" id="2_u3vcp"]
 [ext_resource type="PackedScene" uid="uid://3gdpjqsngmb2" path="res://Objects/CollisionDebugObject/DebugObject.tscn" id="3_mmnot"]
 [ext_resource type="AudioStream" uid="uid://dq3n2w4urwub2" path="res://Resources/Sounds/BackgroundMusic/LobbyBackgroundMusic.mp3" id="4_rcn81"]
+[ext_resource type="PackedScene" uid="uid://b8tr80m36tcit" path="res://Objects/DebugHubPc/DebugHubPc.tscn" id="5_g2lh6"]
+[ext_resource type="PackedScene" uid="uid://c1j2nodig7rei" path="res://Objects/Barrel/Barrel.tscn" id="6_dqgnx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x34ng"]
 size = Vector2(134, 132)
@@ -59,6 +61,17 @@ position = Vector2(0, -150)
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Objects" type="Node2D" parent="."]
+
+[node name="DebugHubPc" parent="Objects" instance=ExtResource("5_g2lh6")]
+position = Vector2(-434, -624)
+
+[node name="Barrel2" parent="Objects" node_paths=PackedStringArray("hurt_box") instance=ExtResource("6_dqgnx")]
+position = Vector2(-259, -624)
+hurt_box = NodePath("../Barrel/HurtBox")
+
+[node name="Barrel" parent="Objects" instance=ExtResource("6_dqgnx")]
+position = Vector2(-311, -624)
+is_destroyable = true
 
 [node name="DebugWall" type="Node2D" parent="Objects"]
 
@@ -347,3 +360,4 @@ position = Vector2(131, 750)
 position = Vector2(66, 750)
 
 [connection signal="body_entered" from="Zones/HostArea" to="." method="_on_host_area_body_entered"]
+[connection signal="use_zone_entered" from="Objects/DebugHubPc" to="." method="_on_debug_hub_pc_use_zone_entered"]

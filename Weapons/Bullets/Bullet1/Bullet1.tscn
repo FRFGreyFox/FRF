@@ -45,8 +45,8 @@ libraries = {
 }
 
 [node name="HitBox" parent="." groups=["attack"] instance=ExtResource("4_f1n75")]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 1
+collision_mask = 1
 
 [node name="CollisionPolygon2D" parent="HitBox" index="0"]
 build_mode = 1

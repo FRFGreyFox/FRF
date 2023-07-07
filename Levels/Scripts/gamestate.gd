@@ -23,7 +23,7 @@ var players = {}
 var players_ready = []
 var player_names = {}
 
-var current_world_scene
+var current_world_scene: BaseLevel
 
 var players_objs: Dictionary
 

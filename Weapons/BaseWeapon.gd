@@ -30,5 +30,5 @@ func start_shooting():
 func _on_attack_timer_timeout():
 	if is_shooting:
 		var new_bullet = bullet.instantiate()
-		gamestate.current_world_scene.players_bullets.add_child(new_bullet)
+		gamestate.current_world_scene.spawn_bullet(new_bullet)
 		new_bullet.fire(player.global_position, player.angle)

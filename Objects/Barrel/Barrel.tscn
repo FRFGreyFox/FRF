@@ -1,17 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1j2nodig7rei"]
+[gd_scene load_steps=7 format=3 uid="uid://c1j2nodig7rei"]
 
 [ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_7im8o"]
 [ext_resource type="Texture2D" uid="uid://bx1p86ttoq3gn" path="res://Resources/Sprites/barrel.png" id="2_q68nv"]
+[ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/HurtBox/hurt_box.tscn" id="3_6qgvt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdt3s"]
+size = Vector2(32, 41)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b2lqg"]
 cull_mode = 2
 polygon = PackedVector2Array(-34.5882, -190.235, 60.5294, -190.235, 112.412, -155.647, 121.059, -95.1177, 129.706, -43.2353, 129.706, 25.9412, 121.059, 77.8235, 112.412, 103.765, 69.1765, 155.647, 43.2353, 164.294, -34.5882, 164.294, -60.5294, 155.647, -103.765, 129.706, -121.059, 103.765, -121.059, 69.1765, -129.706, 8.64706, -129.706, -43.2353, -121.059, -95.1177, -112.412, -129.706, -103.765, -164.294)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdt3s"]
-size = Vector2(32, 41)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ptwr"]
 
-[node name="Barrel" type="StaticBody2D"]
+[node name="Barrel" type="StaticBody2D" node_paths=PackedStringArray("hurt_box")]
 script = ExtResource("1_7im8o")
+hurt_box = NodePath("HurtBox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_mdt3s")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.115646, 0.115646)
@@ -20,7 +29,9 @@ texture = ExtResource("2_q68nv")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
 occluder = SubResource("OccluderPolygon2D_b2lqg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_mdt3s")
+[node name="HurtBox" parent="." instance=ExtResource("3_6qgvt")]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_0ptwr")
