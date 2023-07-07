@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 gamestate="*res://Levels/Scripts/gamestate.gd"
 settings="*res://Utility/config.gd"
 
+[debug]
+
+gdscript/warnings/native_method_override=0
+
 [display]
 
 window/size/viewport_width=1120
