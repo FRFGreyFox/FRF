@@ -9,12 +9,19 @@ const MAX_HP: int = 1000000
 const MAX_ENERGY: int = 1000000
 const MAX_SPEED: int = 1000
 
-@export var is_vulnerable: bool = true
-@export var is_movable: bool = true
-@export_range(1, MAX_HP, 1) var max_hp: int = 100
+@export_category("Base Character")
 @export_range(1, MAX_ENERGY, 1) var max_energy: int = 100
-@export_range(1, MAX_SPEED, 1) var movement_speed: int = 100
 @export var weapon_resource: Resource
+@export_group("movement")
+@export var is_movable: bool = true
+@export_range(1, MAX_SPEED, 1) var movement_speed: int = 100
+@export_group("")
+@export_group("vulnerability")
+@export var is_vulnerable: bool = true
+@export_range(1, MAX_HP, 1) var max_hp: int = 100
+@export var hurt_box: HurtBox
+@export_group("")
+@export_category("")
 
 var current_hp: int= max_hp
 var current_energy: int = max_energy
@@ -23,6 +30,8 @@ var current_weapon: BaseWeapon
 
 
 func _ready() -> void:
+	if is_vulnerable:
+		hurt_box.connect("hurt", take_damage)
 	if weapon_resource:
 		current_weapon = weapon_resource.instantiate()
 		current_weapon.set_name("Weapon")

@@ -6,6 +6,7 @@
 script = ExtResource("1_ytsqq")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.0565745, 0.133276, 0.244493, 1)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c77ie4cl4n5xc"]
+[gd_scene load_steps=7 format=3 uid="uid://c77ie4cl4n5xc"]
 
 [ext_resource type="Script" path="res://Levels/Scripts/Hub.gd" id="1_2ue8t"]
 [ext_resource type="Texture2D" uid="uid://boy3yql7d7ymh" path="res://Resources/Sprites/lobby_background.jpg" id="2_u3vcp"]
@@ -7,14 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://b8tr80m36tcit" path="res://Objects/DebugHubPc/DebugHubPc.tscn" id="5_g2lh6"]
 [ext_resource type="PackedScene" uid="uid://c1j2nodig7rei" path="res://Objects/Barrel/Barrel.tscn" id="6_dqgnx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x34ng"]
-size = Vector2(134, 132)
-
 [node name="Hub" type="Node2D"]
 script = ExtResource("1_2ue8t")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.670588, 0.670588, 0.670588, 1)
+color = Color(0.983878, 0.985189, 0.98709, 1)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rcn81")
@@ -28,13 +25,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1500, 1500)
 
 [node name="Zones" type="Node2D" parent="."]
-
-[node name="HostArea" type="Area2D" parent="Zones"]
-
-[node name="HostZone" type="CollisionShape2D" parent="Zones/HostArea"]
-position = Vector2(-617, -628)
-shape = SubResource("RectangleShape2D_x34ng")
-debug_color = Color(0.615686, 0.537255, 0, 0.419608)
 
 [node name="PlayersSpawnPoints" type="Node2D" parent="."]
 
@@ -359,5 +349,4 @@ position = Vector2(131, 750)
 [node name="69" parent="Objects/DebugWall/Botton" instance=ExtResource("3_mmnot")]
 position = Vector2(66, 750)
 
-[connection signal="body_entered" from="Zones/HostArea" to="." method="_on_host_area_body_entered"]
 [connection signal="use_zone_entered" from="Objects/DebugHubPc" to="." method="_on_debug_hub_pc_use_zone_entered"]

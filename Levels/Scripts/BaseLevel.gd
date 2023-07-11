@@ -11,20 +11,33 @@ class_name BaseLevel
 @onready var bg_music = $BackgroundMusic
 @onready var canvas_color = $CanvasModulate
 
-@export_category("Levels")
+@export_category("Зависимости уровней")
 @export var next_levels: Array[Resource]
 @export_category("")
 
-@export_category("Дополнительные настройки")
-@export_group("dat-night")
+@export_category("Базовый уровень")
+
+@export_group("Day Night")
 @export var day_night_enabled: bool = false
 @export var day_color: Color = Color("#ffffff")
 @export var night_color: Color = Color("#091d3a")
 @export_range(0.1, 1, 0.1) var time_scale: float = 0.1
-@export_group("")
-@export_category("")
-
 var day_night_time: float = 0.0
+@export_group("")
+
+@export_group("Level end settings/Boss settings")
+@export var is_boss_enabled: bool = false
+@export var exist_boss: BaseBoss
+@export_group("")
+
+@export_group("Level end settings/Waves settings")
+@export var is_waves_enabled: bool = false
+@export_group("")
+
+@export_group("Level end settings/Zones settings")
+@export var is_level_target_zones_enabled: bool = false
+
+@export_category("")
 
 
 func _ready() -> void:

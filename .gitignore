@@ -2,3 +2,4 @@
 .godot/
 config.cfg
 export_presets.cfg
+debug.log

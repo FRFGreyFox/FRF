@@ -69,6 +69,7 @@ func _new_movement() -> void:
 	var motion = Vector2()
 
 	if is_multiplayer_authority():
+		InputMap
 		if Input.is_action_pressed("move_left"):
 			motion += Vector2(-1, 0)
 			sprite.flip_h = true

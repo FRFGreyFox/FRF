@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://btyi4ud1hml6s"]
+[gd_scene load_steps=3 format=3 uid="uid://btyi4ud1hml6s"]
 
 [ext_resource type="Script" path="res://Levels/Scripts/SettingsMenu.gd" id="1_ayd6b"]
+[ext_resource type="Script" path="res://Levels/Menues/ControllSettings.gd" id="2_lmrbf"]
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -19,30 +20,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SettingsBar" type="TabBar" parent="SettingsPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.005
-anchor_top = 0.005
-anchor_right = 0.995
-anchor_bottom = 0.05
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
-tab_count = 4
-tab_0/title = "Игра"
-tab_1/title = "Экран"
-tab_2/title = "Звук"
-tab_3/title = "Управление"
-
-[node name="SettingsGamePanel" type="Panel" parent="SettingsPanel"]
+[node name="SettingsBar" type="TabContainer" parent="SettingsPanel"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
-anchor_top = 0.07
 anchor_right = 0.99
 anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/SettingsGamePanel"]
+[node name="Игра" type="Panel" parent="SettingsPanel/SettingsBar"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Игра"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,16 +49,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Игровые настройки"
 
-[node name="SettingsScreenPanel" type="Panel" parent="SettingsPanel"]
+[node name="Экран" type="Panel" parent="SettingsPanel/SettingsBar"]
 visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.01
-anchor_top = 0.07
-anchor_right = 0.99
-anchor_bottom = 0.85
+layout_mode = 2
 
-[node name="SettingsScreenGroup" type="ReferenceRect" parent="SettingsPanel/SettingsScreenPanel"]
+[node name="SettingsScreenGroup" type="ReferenceRect" parent="SettingsPanel/SettingsBar/Экран"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -75,7 +62,7 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 border_width = 0.0
 
-[node name="WindowModeGroup" type="ReferenceRect" parent="SettingsPanel/SettingsScreenPanel/SettingsScreenGroup"]
+[node name="WindowModeGroup" type="ReferenceRect" parent="SettingsPanel/SettingsBar/Экран/SettingsScreenGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -84,7 +71,7 @@ border_color = Color(0.686275, 0.686275, 0.686275, 1)
 border_width = 2.0
 editor_only = false
 
-[node name="DisplayMode" type="OptionButton" parent="SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/WindowModeGroup"]
+[node name="DisplayMode" type="OptionButton" parent="SettingsPanel/SettingsBar/Экран/SettingsScreenGroup/WindowModeGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -101,7 +88,7 @@ popup/item_1/id = 1
 popup/item_2/text = "Полный экран"
 popup/item_2/id = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/WindowModeGroup"]
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Экран/SettingsScreenGroup/WindowModeGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -112,7 +99,7 @@ vertical_alignment = 1
 uppercase = true
 language = "ru_RU"
 
-[node name="VsyncGroup" type="ReferenceRect" parent="SettingsPanel/SettingsScreenPanel/SettingsScreenGroup"]
+[node name="VsyncGroup" type="ReferenceRect" parent="SettingsPanel/SettingsBar/Экран/SettingsScreenGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.1
@@ -122,7 +109,7 @@ border_color = Color(0.686275, 0.686275, 0.686275, 1)
 border_width = 2.0
 editor_only = false
 
-[node name="VSYNC" type="OptionButton" parent="SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/VsyncGroup"]
+[node name="VSYNC" type="OptionButton" parent="SettingsPanel/SettingsBar/Экран/SettingsScreenGroup/VsyncGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -140,7 +127,7 @@ popup/item_1/id = 1
 popup/item_2/text = "Адаптивный"
 popup/item_2/id = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/VsyncGroup"]
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Экран/SettingsScreenGroup/VsyncGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -151,16 +138,11 @@ vertical_alignment = 1
 uppercase = true
 language = "ru_RU"
 
-[node name="SettingsSoundPanel" type="Panel" parent="SettingsPanel"]
+[node name="Звук" type="Panel" parent="SettingsPanel/SettingsBar"]
 visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.01
-anchor_top = 0.07
-anchor_right = 0.99
-anchor_bottom = 0.85
+layout_mode = 2
 
-[node name="SettingsSoundGroup" type="ReferenceRect" parent="SettingsPanel/SettingsSoundPanel"]
+[node name="SettingsSoundGroup" type="ReferenceRect" parent="SettingsPanel/SettingsBar/Звук"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -169,7 +151,7 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 border_width = 0.0
 
-[node name="MusicGroup" type="ReferenceRect" parent="SettingsPanel/SettingsSoundPanel/SettingsSoundGroup"]
+[node name="MusicGroup" type="ReferenceRect" parent="SettingsPanel/SettingsBar/Звук/SettingsSoundGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -178,7 +160,7 @@ border_color = Color(0.686275, 0.686275, 0.686275, 1)
 border_width = 2.0
 editor_only = false
 
-[node name="Label" type="Label" parent="SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/MusicGroup"]
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Звук/SettingsSoundGroup/MusicGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -189,7 +171,7 @@ vertical_alignment = 1
 uppercase = true
 language = "ru_RU"
 
-[node name="MusicSlider" type="HSlider" parent="SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/MusicGroup"]
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/SettingsBar/Звук/SettingsSoundGroup/MusicGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -200,7 +182,7 @@ max_value = 0.0
 tick_count = 5
 ticks_on_borders = true
 
-[node name="SoundGroup" type="ReferenceRect" parent="SettingsPanel/SettingsSoundPanel/SettingsSoundGroup"]
+[node name="SoundGroup" type="ReferenceRect" parent="SettingsPanel/SettingsBar/Звук/SettingsSoundGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.1
@@ -210,7 +192,7 @@ border_color = Color(0.686275, 0.686275, 0.686275, 1)
 border_width = 2.0
 editor_only = false
 
-[node name="Label" type="Label" parent="SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/SoundGroup"]
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Звук/SettingsSoundGroup/SoundGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -221,7 +203,7 @@ vertical_alignment = 1
 uppercase = true
 language = "ru_RU"
 
-[node name="SoundSlider" type="HSlider" parent="SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/SoundGroup"]
+[node name="SoundSlider" type="HSlider" parent="SettingsPanel/SettingsBar/Звук/SettingsSoundGroup/SoundGroup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -233,29 +215,137 @@ max_value = 0.0
 tick_count = 5
 ticks_on_borders = true
 
-[node name="SettingsControllPanel" type="Panel" parent="SettingsPanel"]
-visible = false
+[node name="Управление" type="Panel" parent="SettingsPanel/SettingsBar"]
+layout_mode = 2
+script = ExtResource("2_lmrbf")
+
+[node name="ScrollButtonsContainer" type="ScrollContainer" parent="SettingsPanel/SettingsBar/Управление"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
-anchor_top = 0.07
+anchor_top = 0.01
 anchor_right = 0.99
-anchor_bottom = 0.85
+anchor_bottom = 0.99
 
-[node name="Label" type="Label" parent="SettingsPanel/SettingsControllPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Настройки управления"
+[node name="VerticalButtonsCOntainer" type="VBoxContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+
+[node name="move_up" type="HBoxContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_up"]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_up/LabelContainer"]
+layout_mode = 2
+text = "Вверх"
+
+[node name="VSeparator" type="VSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_up"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_up"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="move_up" type="Button" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_up/ButtonContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "кнопка"
+
+[node name="HSeparator" type="HSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+
+[node name="move_down" type="HBoxContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_down"]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_down/LabelContainer"]
+layout_mode = 2
+text = "Вниз"
+
+[node name="VSeparator" type="VSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_down"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_down"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="move_down" type="Button" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_down/ButtonContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "кнопка"
+
+[node name="HSeparator2" type="HSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+
+[node name="move_left" type="HBoxContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_left"]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_left/LabelContainer"]
+layout_mode = 2
+text = "Влево"
+
+[node name="VSeparator" type="VSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_left"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_left"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="move_left" type="Button" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_left/ButtonContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "кнопка"
+
+[node name="HSeparator3" type="HSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+
+[node name="move_right" type="HBoxContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_right"]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_right/LabelContainer"]
+layout_mode = 2
+text = "Впрова"
+
+[node name="VSeparator" type="VSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_right"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="PanelContainer" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_right"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="move_right" type="Button" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_right/ButtonContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "кнопка"
+
+[node name="HSeparator5" type="HSeparator" parent="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer"]
+layout_mode = 2
 
 [node name="BackButton" type="Button" parent="SettingsPanel"]
 layout_mode = 1
@@ -294,6 +384,10 @@ language = "ru_RU"
 [node name="SaveLabelTimer" type="Timer" parent="SettingsPanel"]
 wait_time = 0.1
 
-[connection signal="tab_selected" from="SettingsPanel/SettingsBar" to="." method="_on_settings_bar_tab_selected"]
+[connection signal="toggled" from="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_up/ButtonContainer/move_up" to="SettingsPanel/SettingsBar/Управление" method="_on_move_up_toggled"]
+[connection signal="toggled" from="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_down/ButtonContainer/move_down" to="SettingsPanel/SettingsBar/Управление" method="_on_move_down_toggled"]
+[connection signal="toggled" from="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_left/ButtonContainer/move_left" to="SettingsPanel/SettingsBar/Управление" method="_on_move_left_toggled"]
+[connection signal="toggled" from="SettingsPanel/SettingsBar/Управление/ScrollButtonsContainer/VerticalButtonsCOntainer/move_right/ButtonContainer/move_right" to="SettingsPanel/SettingsBar/Управление" method="_on_move_right_toggled"]
 [connection signal="pressed" from="SettingsPanel/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="SettingsPanel/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="timeout" from="SettingsPanel/SaveLabelTimer" to="." method="_on_save_label_timer_timeout"]

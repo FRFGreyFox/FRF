@@ -20,7 +20,6 @@ hurt_box = NodePath("HurtBox")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_mdt3s")
-disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.115646, 0.115646)

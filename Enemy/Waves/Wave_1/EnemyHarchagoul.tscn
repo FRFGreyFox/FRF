@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpq5tvydnvgi6"]
+[gd_scene load_steps=11 format=3 uid="uid://dpq5tvydnvgi6"]
 
 [ext_resource type="Script" path="res://Enemy/BasicEnemy.gd" id="1_i44ei"]
 [ext_resource type="Texture2D" uid="uid://cdbgobbpn538e" path="res://Enemy/Waves/Wave_1/sEnemy_strip7.png" id="2_bjwhj"]
@@ -45,9 +45,6 @@ _data = {
 "walk": SubResource("Animation_p2was")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8lobv"]
-radius = 33.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8hit"]
 size = Vector2(48.2128, 26.3205)
 
@@ -72,10 +69,6 @@ visible = false
 position = Vector2(159, -34)
 collision_layer = 4
 collision_mask = 4
-
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-149.625, 52.375)
-shape = SubResource("CircleShape2D_8lobv")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_cddim")]
 offset_left = -20.0

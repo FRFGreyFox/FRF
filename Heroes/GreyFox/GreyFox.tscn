@@ -39,11 +39,12 @@ height = 68.0
 radius = 30.0
 height = 65.0
 
-[node name="GreyFox" type="CharacterBody2D"]
+[node name="GreyFox" type="CharacterBody2D" node_paths=PackedStringArray("hurt_box")]
 script = ExtResource("1_8btf1")
-max_hp = 50
-movement_speed = 200
 weapon_resource = ExtResource("2_8fvq1")
+movement_speed = 200
+max_hp = 50
+hurt_box = NodePath("HurtBox")
 
 [node name="PointLight" type="PointLight2D" parent="."]
 position = Vector2(-0.5, 14.5)
@@ -72,6 +73,7 @@ shape = SubResource("CapsuleShape2D_fihar")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, 9)
 rotation = 0.523598
+position_smoothing_enabled = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, 4.25)

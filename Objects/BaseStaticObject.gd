@@ -29,7 +29,6 @@ func _ready() -> void:
 
 func _object_entered_use_zone(who: Node2D) -> void:
 	emit_signal("use_zone_entered", who)
-	print_debug(who, " intered in use zone of ", name)
 
 
 @rpc("call_local")

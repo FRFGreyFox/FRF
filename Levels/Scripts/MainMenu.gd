@@ -2,11 +2,6 @@ extends Control
 
 @onready var main_panel = $MainPanel
 @onready var settings_panel = $SettingsMenu
-@onready var music_slider = $SettingsMenu/SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/MusicGroup/MusicSlider
-@onready var sound_slider = $SettingsMenu/SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/SoundGroup/SoundSlider
-@onready var display_mode = $SettingsMenu/SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/WindowModeGroup/DisplayMode
-@onready var vsync_mode = $SettingsMenu/SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/VsyncGroup/VSYNC
-@onready var menu_music = $MenuMusic
 @onready var connect_menu = $ConnectMenu
 @onready var connect_name = $ConnectMenu/PlayerNameZone/Name
 @onready var connect_error_text = $ConnectMenu/ErrorLabel
