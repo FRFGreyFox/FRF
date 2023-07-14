@@ -29,7 +29,6 @@ func _ready() -> void:
 
 func _object_entered_use_zone(who: Node2D) -> void:
 	emit_signal("use_zone_entered", who)
-	print_debug(who, " intered in use zone of ", name)
 
 
 @rpc("call_local")
@@ -38,7 +37,6 @@ func set_current_hp(new_hp: int) -> void:
 
 
 func take_damage(damage: int) -> void:
-	print_debug(damage)
 	if is_destroyable:
 		if current_hp - damage > 0:
 			rpc("set_current_hp", current_hp - damage)

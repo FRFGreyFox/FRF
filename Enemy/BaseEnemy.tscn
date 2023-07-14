@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://fqynsij5x25t"]
+
+[ext_resource type="Script" path="res://Enemy/BaseEnemy.gd" id="1_vjaqe"]
+[ext_resource type="StyleBox" uid="uid://bd77tqxe26tsa" path="res://Utility/HealthBar/EnemyHealthBarStyle.tres" id="2_d70m2"]
+
+[node name="BaseEnemy" type="CharacterBody2D"]
+script = ExtResource("1_vjaqe")
+hp_fill_style = ExtResource("2_d70m2")

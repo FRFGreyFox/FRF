@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name BasicEnemy
+class_name BaseEnemy
 
 @export var max_hp: int = 150
 @export var movement_speed: float = 100.0

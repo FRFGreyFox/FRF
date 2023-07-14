@@ -1,16 +1,16 @@
 extends Control
 
 
-@onready var settings_game = $SettingsPanel/SettingsGamePanel
-@onready var settings_screen = $SettingsPanel/SettingsScreenPanel
-@onready var settings_audio = $SettingsPanel/SettingsSoundPanel
-@onready var settings_control = $SettingsPanel/SettingsControllPanel
+@onready var settings_game = $"SettingsPanel/SettingsBar/Игра"
+@onready var settings_screen = $"SettingsPanel/SettingsBar/Экран"
+@onready var settings_audio = $"SettingsPanel/SettingsBar/Звук"
+@onready var settings_control = $"SettingsPanel/SettingsBar/Управление"
 @onready var save_label = $SettingsPanel/SaveLabel
 @onready var save_label_timer = $SettingsPanel/SaveLabelTimer
-@onready var music_slider = $SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/MusicGroup/MusicSlider
-@onready var sound_slider = $SettingsPanel/SettingsSoundPanel/SettingsSoundGroup/SoundGroup/SoundSlider
-@onready var display_mode = $SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/WindowModeGroup/DisplayMode
-@onready var vsync_mode = $SettingsPanel/SettingsScreenPanel/SettingsScreenGroup/VsyncGroup/VSYNC
+@onready var music_slider = $SettingsPanel/SettingsBar/Звук/SettingsSoundGroup/MusicGroup/MusicSlider
+@onready var sound_slider = $SettingsPanel/SettingsBar/Звук/SettingsSoundGroup/SoundGroup/SoundSlider
+@onready var display_mode = $SettingsPanel/SettingsBar/Экран/SettingsScreenGroup/WindowModeGroup/DisplayMode
+@onready var vsync_mode = $SettingsPanel/SettingsBar/Экран/SettingsScreenGroup/VsyncGroup/VSYNC
 @onready var settings_list = [
 	settings_game,
 	settings_screen,
@@ -22,23 +22,28 @@ extends Control
 var parent_menu
 
 
-func _ready():
-	
+func _ready() -> void:
+	_load_sounds_settings()
+	_load_graphic_settings()
+	_load_control_settings()
+
+
+func _load_sounds_settings() -> void:
 	var music_volume = settings.get_config("sound", "music")
 	if not music_volume == null:
 		music_slider.value = music_volume
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_volume)
-	
 	var sound_volume = settings.get_config("sound", "sound")
 	if not sound_volume == null:
 		sound_slider.value = sound_volume
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"), sound_volume)
-	
+
+
+func _load_graphic_settings() -> void:
 	var display_mode_config = settings.get_config("display", "display_mode")
 	if not display_mode_config == null:
 		_update_display_mode(display_mode_config)
 		display_mode.selected = display_mode_config
-	
 	var vsync_mode_config = settings.get_config("display", "vsync")
 	if not vsync_mode_config == null:
 		var vsync_mode_value: int = 0
@@ -51,6 +56,13 @@ func _ready():
 	else:
 		vsync_mode.selected = 1
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+
+
+func _load_control_settings() -> void:
+	for button in settings_control.buttons:
+		var button_id = settings.get_config("controll", button.name)
+		if button_id:
+			settings_control.set_key_to_action_event(button.name, button_id)
 
 
 func set_parrent_menu(new_parent_menu):
@@ -116,6 +128,14 @@ func _on_apply_button_pressed():
 	
 	# Сохранение VSYNC
 	settings.save_config("display", "vsync", vsync_mode.selected)
+	
+	# Сохранение управления
+	for button in settings_control.buttons:
+		settings.save_config(
+			"controll",
+			button.name,
+			InputMap.action_get_events(button.name)[0].physical_keycode
+		)
 	
 	save_label_timer.start()
 

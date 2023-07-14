@@ -1,0 +1,351 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqywangsfnirk"]
+
+[ext_resource type="Script" path="res://Stages/Debug/DebugLevel.gd" id="1_jiaqa"]
+[ext_resource type="AudioStream" uid="uid://dq3n2w4urwub2" path="res://Resources/Sounds/BackgroundMusic/LobbyBackgroundMusic.mp3" id="2_0wr7r"]
+[ext_resource type="Texture2D" uid="uid://boy3yql7d7ymh" path="res://Resources/Sprites/lobby_background.jpg" id="3_v8uy7"]
+[ext_resource type="PackedScene" uid="uid://b8tr80m36tcit" path="res://Objects/DebugHubPc/DebugHubPc.tscn" id="4_wt57q"]
+[ext_resource type="PackedScene" uid="uid://c1j2nodig7rei" path="res://Objects/Barrel/Barrel.tscn" id="5_qlr1j"]
+[ext_resource type="PackedScene" uid="uid://3gdpjqsngmb2" path="res://Objects/CollisionDebugObject/DebugObject.tscn" id="6_v65fu"]
+
+[node name="DebugLevel" type="Node2D"]
+script = ExtResource("1_jiaqa")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.983878, 0.985189, 0.98709, 1)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0wr7r")
+autoplay = true
+bus = &"Music"
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 3
+texture = ExtResource("3_v8uy7")
+region_enabled = true
+region_rect = Rect2(0, 0, 1500, 1500)
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="PlayersSpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(-150, 0)
+
+[node name="1" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(150, 0)
+
+[node name="2" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, 150)
+
+[node name="3" type="Marker2D" parent="PlayersSpawnPoints"]
+position = Vector2(0, -150)
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="NPCs"]
+
+[node name="Allies" type="Node2D" parent="NPCs"]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="DebugHubPc" parent="Objects" instance=ExtResource("4_wt57q")]
+position = Vector2(-434, -624)
+
+[node name="Barrel2" parent="Objects" instance=ExtResource("5_qlr1j")]
+position = Vector2(-259, -624)
+
+[node name="Barrel" parent="Objects" instance=ExtResource("5_qlr1j")]
+position = Vector2(-311, -624)
+is_destroyable = true
+
+[node name="DebugWall" type="Node2D" parent="Objects"]
+
+[node name="Left" type="Node2D" parent="Objects/DebugWall"]
+
+[node name="1" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 0)
+
+[node name="2" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 65)
+
+[node name="3" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 130)
+
+[node name="4" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 195)
+
+[node name="5" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 260)
+
+[node name="6" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 325)
+
+[node name="7" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 390)
+
+[node name="8" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 455)
+
+[node name="9" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 520)
+
+[node name="10" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 585)
+
+[node name="11" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 650)
+
+[node name="12" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, 715)
+
+[node name="13" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -716)
+
+[node name="14" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -651)
+
+[node name="15" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -586)
+
+[node name="16" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -521)
+
+[node name="17" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -456)
+
+[node name="18" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -391)
+
+[node name="19" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -326)
+
+[node name="20" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -261)
+
+[node name="21" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -196)
+
+[node name="22" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -131)
+
+[node name="23" parent="Objects/DebugWall/Left" instance=ExtResource("6_v65fu")]
+position = Vector2(-750, -66)
+
+[node name="Right" type="Node2D" parent="Objects/DebugWall"]
+
+[node name="24" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 0)
+
+[node name="25" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 65)
+
+[node name="26" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 130)
+
+[node name="27" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 195)
+
+[node name="28" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 260)
+
+[node name="29" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 325)
+
+[node name="30" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 390)
+
+[node name="31" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 455)
+
+[node name="32" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 520)
+
+[node name="33" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 585)
+
+[node name="34" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 650)
+
+[node name="35" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, 715)
+
+[node name="36" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -716)
+
+[node name="37" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -651)
+
+[node name="38" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -586)
+
+[node name="39" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -521)
+
+[node name="40" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -456)
+
+[node name="41" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -391)
+
+[node name="42" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -326)
+
+[node name="43" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -261)
+
+[node name="44" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -196)
+
+[node name="45" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -131)
+
+[node name="46" parent="Objects/DebugWall/Right" instance=ExtResource("6_v65fu")]
+position = Vector2(750, -66)
+
+[node name="Top" type="Node2D" parent="Objects/DebugWall"]
+
+[node name="47" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(0, -750)
+
+[node name="48" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-65, -750)
+
+[node name="49" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-130, -750)
+
+[node name="50" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-195, -750)
+
+[node name="51" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-260, -750)
+
+[node name="52" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-325, -750)
+
+[node name="53" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-390, -750)
+
+[node name="54" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-455, -750)
+
+[node name="55" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-520, -750)
+
+[node name="56" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-585, -750)
+
+[node name="57" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-650, -750)
+
+[node name="58" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(-715, -750)
+
+[node name="59" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(716, -750)
+
+[node name="60" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(651, -750)
+
+[node name="61" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(586, -750)
+
+[node name="62" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(521, -750)
+
+[node name="63" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(456, -750)
+
+[node name="64" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(391, -750)
+
+[node name="65" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(326, -750)
+
+[node name="66" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(261, -750)
+
+[node name="67" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(196, -750)
+
+[node name="68" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(131, -750)
+
+[node name="69" parent="Objects/DebugWall/Top" instance=ExtResource("6_v65fu")]
+position = Vector2(66, -750)
+
+[node name="Botton" type="Node2D" parent="Objects/DebugWall"]
+
+[node name="47" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(0, 750)
+
+[node name="48" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-65, 750)
+
+[node name="49" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-130, 750)
+
+[node name="50" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-195, 750)
+
+[node name="51" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-260, 750)
+
+[node name="52" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-325, 750)
+
+[node name="53" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-390, 750)
+
+[node name="54" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-455, 750)
+
+[node name="55" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-520, 750)
+
+[node name="56" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-585, 750)
+
+[node name="57" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-650, 750)
+
+[node name="58" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(-715, 750)
+
+[node name="59" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(716, 750)
+
+[node name="60" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(651, 750)
+
+[node name="61" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(586, 750)
+
+[node name="62" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(521, 750)
+
+[node name="63" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(456, 750)
+
+[node name="64" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(391, 750)
+
+[node name="65" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(326, 750)
+
+[node name="66" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(261, 750)
+
+[node name="67" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(196, 750)
+
+[node name="68" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(131, 750)
+
+[node name="69" parent="Objects/DebugWall/Botton" instance=ExtResource("6_v65fu")]
+position = Vector2(66, 750)
+
+[connection signal="use_zone_entered" from="Objects/DebugHubPc" to="." method="_on_debug_hub_pc_use_zone_entered"]

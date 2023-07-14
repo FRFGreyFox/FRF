@@ -9,20 +9,31 @@ const MAX_HP: int = 1000000
 const MAX_ENERGY: int = 1000000
 const MAX_SPEED: int = 1000
 
-@export var is_vulnerable: bool = true
-@export var is_movable: bool = true
-@export_range(1, MAX_HP, 1) var max_hp: int = 100
+@export_category("Base Character")
 @export_range(1, MAX_ENERGY, 1) var max_energy: int = 100
-@export_range(1, MAX_SPEED, 1) var movement_speed: int = 100
 @export var weapon_resource: Resource
+@export_group("movement")
+@export var is_movable: bool = true
+@export_range(1, MAX_SPEED, 1) var movement_speed: int = 100
+@export_group("")
+@export_group("vulnerability")
+@export var is_vulnerable: bool = true
+@export_range(1, MAX_HP, 1) var max_hp: int = 100
+@export var hurt_box: HurtBox
+@export var phisic_collision: CollisionShape2D
+@export_group("")
+@export_category("")
 
-var current_hp: int= max_hp
+@onready var current_hp: int= max_hp
+var puppet_current_hp: int = current_hp
 var current_energy: int = max_energy
 var is_alive: bool = true
 var current_weapon: BaseWeapon
 
 
 func _ready() -> void:
+	if is_vulnerable:
+		hurt_box.connect("hurt", take_damage)
 	if weapon_resource:
 		current_weapon = weapon_resource.instantiate()
 		current_weapon.set_name("Weapon")
@@ -54,10 +65,9 @@ func set_max_hp(new_max_hp: int) -> void:
 	emit_signal("max_hp_updated", max_hp)
 
 
-@rpc("call_local")
+@rpc("any_peer")
 func set_current_hp(new_current_hp: int) -> void:
-	current_hp = new_current_hp
-	emit_signal("current_hp_updated", current_hp)
+	puppet_current_hp = new_current_hp
 
 
 func add_max_hp(add_hp: int) -> void:
@@ -82,32 +92,38 @@ func check_livenes() -> bool:
 	return true
 
 
-@rpc("call_local")
+@rpc("any_peer")
 func _take_damage(damage: int) -> void:
-	if is_vulnerable:
-		set_current_hp(current_hp - damage)
+	rpc("set_current_hp", current_hp - damage)
 
 
 func take_damage(damage: int) -> void:
 	if is_vulnerable:
-		rpc("_take_damage", damage)
-	check_for_dying()
+		if is_multiplayer_authority():
+			current_hp = current_hp - damage
+			check_for_dying()
+			rpc("set_current_hp", current_hp)
+		else:
+			current_hp = puppet_current_hp
+		emit_signal("current_hp_updated", current_hp)
 
 
 @rpc("call_local")
-func _die() -> void:
-	var ui = get_node("UI")
+func _die():
+	var ui = get_node("UI/IngameUI")
 	if ui:
 		ui.hide()
 	if current_weapon:
 		current_weapon.stop_shooting()
+	if phisic_collision:
+		phisic_collision.set_deferred("disabled", true)
 	is_alive = false
-	hide()
+	get_node("Sprite").hide()
 	is_movable = false
 
 
 func die():
-	rpc("die")
+	rpc("_die")
 
 
 @rpc("any_peer")
@@ -121,8 +137,8 @@ func hide():
 
 
 func check_for_dying() -> void:
-	if is_vulnerable and is_alive and current_hp <= 0:
-		rpc("die")
+	if is_vulnerable and is_alive and current_hp <= 0 and is_multiplayer_authority():
+		rpc("_die")
 
 
 func move_and_slide():

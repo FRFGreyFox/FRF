@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://byj3xpdmc5617"]
 
-[ext_resource type="Script" path="res://Levels/Scripts/EndGameMenu.gd" id="1_kxeyf"]
+[ext_resource type="Script" path="res://Menues/EndGameMenu/EndGameMenu.gd" id="1_kxeyf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pmbtk"]
 font_size = 30
