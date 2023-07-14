@@ -9,10 +9,10 @@ class_name BaseHero
 @onready var sprite = $Sprite
 @onready var animation = $Animation
 @onready var ui = $UI
-@onready var health_bar = $UI/HealthBar
-@onready var ingame_menu = $UI/IngameMainMenu
-@onready var endgame_menu = $UI/EndGameMenu
-@onready var player_name = $UI/PlayerNameLabel
+@onready var health_bar = $UI/IngameUI/HealthBar
+@onready var ingame_menu = $UI/Menues/IngameMainMenu
+@onready var endgame_menu = $UI/Menues/EndGameMenu
+@onready var player_name = $UI/IngameUI/PlayerNameLabel
 
 var puppet_pos: Vector2 = Vector2()
 var puppet_motion: Vector2 = Vector2()
@@ -129,6 +129,6 @@ func _on_ingame_main_menu_exit_pressed():
 	multiplayer.set_multiplayer_peer(null)
 	
 	# Грузим главное меню, очищаем ссостояние игры.
-	var main_menu = load("res://Levels/Menues/MainMenu.tscn").instantiate()
+	var main_menu = load("res://Menues/MainMenu/MainMenu.tscn").instantiate()
 	get_tree().get_root().add_child(main_menu)
 	gamestate.current_world_scene.queue_free()

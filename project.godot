@@ -11,14 +11,15 @@ config_version=5
 [application]
 
 config/name="Frf Ultima"
-run/main_scene="res://Levels/Menues/MainMenu.tscn"
+run/main_scene="res://Menues/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-gamestate="*res://Levels/Scripts/gamestate.gd"
+gamestate="*res://Stages/Scripts/gamestate.gd"
 settings="*res://Utility/config.gd"
+global_events="*res://Stages/Scripts/GlobalEvents.gd"
 
 [debug]
 

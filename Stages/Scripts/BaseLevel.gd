@@ -96,7 +96,7 @@ func get_enemies() -> Array:
 	return enemies.get_children()
 
 
-func spawn_enemy(new_enemy: BasicEnemy, object_position: Vector2) -> void:
+func spawn_enemy(new_enemy: BaseEnemy, object_position: Vector2) -> void:
 	enemies.add_child(new_enemy)
 	new_enemy.position = object_position
 

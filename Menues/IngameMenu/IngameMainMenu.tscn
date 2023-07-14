@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ci53v2ne7vabf"]
 
-[ext_resource type="Script" path="res://Levels/Scripts/IngameMainMenu.gd" id="1_jtly2"]
-[ext_resource type="PackedScene" uid="uid://btyi4ud1hml6s" path="res://Levels/Menues/SettingsMenu.tscn" id="2_cxwdt"]
+[ext_resource type="Script" path="res://Menues/IngameMenu/IngameMainMenu.gd" id="1_jtly2"]
+[ext_resource type="PackedScene" uid="uid://btyi4ud1hml6s" path="res://Menues/SettingsMenu/SettingsMenu.tscn" id="2_cxwdt"]
 
 [node name="IngameMainMenu" type="Control"]
 layout_mode = 3

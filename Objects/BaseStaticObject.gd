@@ -37,7 +37,6 @@ func set_current_hp(new_hp: int) -> void:
 
 
 func take_damage(damage: int) -> void:
-	print_debug(damage)
 	if is_destroyable:
 		if current_hp - damage > 0:
 			rpc("set_current_hp", current_hp - damage)

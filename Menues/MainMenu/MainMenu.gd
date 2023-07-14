@@ -32,8 +32,12 @@ func _check_player_name(player_name: String) -> bool:
 func _on_host_pressed():
 	if not _check_player_name(connect_name.text):
 		return
+	
+	# TODO: delete this
+	var is_debug: CheckBox = $ConnectMenu/ButtonsZone/is_debug
+	
 	gamestate.start_server(connect_name.text)
-	gamestate.load_hub_server(connect_name.text)
+	gamestate.load_hub_server(connect_name.text, is_debug.button_pressed)
 	queue_free()
 
 

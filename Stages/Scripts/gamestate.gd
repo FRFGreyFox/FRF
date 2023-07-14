@@ -171,20 +171,23 @@ func end_game():
 	players.clear()
 
 
-func load_current_world_scene():
+func load_current_world_scene(is_debug: bool):
 	"""Прогружаем ресурс лобби и отрисовываем его."""
-	current_world_scene = load("res://Levels/Scenes/Hub.tscn").instantiate()
+	if is_debug:
+		current_world_scene = load("res://Stages/Debug/DebugLevel.tscn").instantiate()
+	else:
+		current_world_scene = load("res://Stages/Hub/Hub.tscn").instantiate()
 	get_tree().get_root().add_child(current_world_scene)
 
 
-func load_hub_server(new_player_name: String):
-	load_current_world_scene()
+func load_hub_server(new_player_name: String, is_debug: bool = false):
+	load_current_world_scene(is_debug)
 	var self_player = load_new_player(1)
 	self_player.set_player_name(new_player_name)
 
 
-func load_hub_client(new_player_name: String):
-	load_current_world_scene()
+func load_hub_client(new_player_name: String, is_debug: bool = false):
+	load_current_world_scene(is_debug)
 	var player_id = multiplayer.get_unique_id()
 	player_names[player_id] = new_player_name
 	var self_player = load_new_player(multiplayer.get_unique_id())

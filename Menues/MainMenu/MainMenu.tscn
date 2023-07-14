@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://byr0m0ymwu7dn"]
 
-[ext_resource type="Script" path="res://Levels/Scripts/MainMenu.gd" id="1_k4ddh"]
-[ext_resource type="PackedScene" uid="uid://btyi4ud1hml6s" path="res://Levels/Menues/SettingsMenu.tscn" id="2_bmhs3"]
+[ext_resource type="Script" path="res://Menues/MainMenu/MainMenu.gd" id="1_k4ddh"]
+[ext_resource type="PackedScene" uid="uid://btyi4ud1hml6s" path="res://Menues/SettingsMenu/SettingsMenu.tscn" id="2_bmhs3"]
 [ext_resource type="AudioStream" uid="uid://78w2vhmxj87t" path="res://Resources/Sounds/BackgroundMusic/MainMenuBackgroundMusic.mp3" id="2_ir8ub"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ieon"]
@@ -213,6 +213,14 @@ anchor_right = 0.6
 anchor_bottom = 0.9
 text = "назад"
 language = "ru_RU"
+
+[node name="is_debug" type="CheckBox" parent="ConnectMenu/ButtonsZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.195
+anchor_top = 0.593
+anchor_right = 0.261
+anchor_bottom = 0.869
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ir8ub")

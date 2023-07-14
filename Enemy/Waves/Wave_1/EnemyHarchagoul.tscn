@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dpq5tvydnvgi6"]
 
-[ext_resource type="Script" path="res://Enemy/BasicEnemy.gd" id="1_i44ei"]
+[ext_resource type="Script" path="res://Enemy/BaseEnemy.gd" id="1_i44ei"]
 [ext_resource type="Texture2D" uid="uid://cdbgobbpn538e" path="res://Enemy/Waves/Wave_1/sEnemy_strip7.png" id="2_bjwhj"]
 [ext_resource type="StyleBox" uid="uid://bd77tqxe26tsa" path="res://Utility/HealthBar/EnemyHealthBarStyle.tres" id="2_j0k4a"]
 [ext_resource type="PackedScene" uid="uid://b54svb1s4kpin" path="res://Utility/HurtBox/hurt_box.tscn" id="3_k3yh6"]
