@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SceneTransition="*res://Menues/StageSelectMenu/scene transition.tscn"
 gamestate="*res://Stages/Scripts/gamestate.gd"
 settings="*res://Utility/config.gd"
 global_events="*res://Stages/Scripts/GlobalEvents.gd"

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx64773ymech3"]
+
+[ext_resource type="Texture2D" uid="uid://dqfocbfa5yqk1" path="res://Resources/Sprites/HubSprite/spaceShip.png" id="1_kqc54"]
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_sfty0"]
+
+[node name="SpaceShip" type="StaticBody2D"]
+collision_layer = 4294967295
+collision_mask = 4294967295
+script = ExtResource("1_sfty0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_kqc54")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 21)
+build_mode = 1
+polygon = PackedVector2Array(58, -141, 57, -5, 44, -3, 35, -8, 19, 5, -35, -3, -58, -12, -68, -2, -69, -147, -91, -157, -110, -147, -156, -202, -165, -163, -139, -77, -136, -21, -138, -3, -158, -4, -159, 48, -157, 82, -139, 75, -142, 40, -122, 51, -93, 34, -83, 42, -77, 55, -84, 86, -74, 97, -65, 103, -62, 137, -46, 144, 49, 145, 54, 114, 62, 105, 69, 97, 64, 56, 60, 34, 93, 56, 124, 48, 131, 81, 143, 73, 143, -8, 132, -19, 123, -79, 145, -150, 139, -198, 103, -146, 65, -156)

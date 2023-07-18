@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpph28vc0x245"]
+
+[ext_resource type="Texture2D" uid="uid://ch808xbkluhd8" path="res://Resources/Sprites/HubSprite/SpaceShipWalkOn.png" id="1_hvxfg"]
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_phvur"]
+
+[node name="BorderWall" type="StaticBody2D"]
+collision_layer = 4294967295
+collision_mask = 4294967295
+script = ExtResource("1_phvur")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_hvxfg")

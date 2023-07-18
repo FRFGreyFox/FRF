@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://d26hmc41qs3qm"]
+
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_4fowy"]
+[ext_resource type="Texture2D" uid="uid://ctbeco6njiui2" path="res://Resources/Sprites/box.png" id="1_4mkhk"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5r1ys"]
+polygon = PackedVector2Array(17.2942, 17.2942, 17.2942, -17.2942, -17.2942, -17.2942, -17.2942, 17.2942)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifprs"]
+size = Vector2(51.75, 53)
+
+[node name="Box" type="StaticBody2D"]
+script = ExtResource("1_4fowy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(18.1905, 22.0884)
+scale = Vector2(2, 2)
+texture = ExtResource("1_4mkhk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+visible = false
+occluder = SubResource("OccluderPolygon2D_5r1ys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 29)
+shape = SubResource("RectangleShape2D_ifprs")

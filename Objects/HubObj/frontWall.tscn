@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dml43syiqxuoe"]
+
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_71ihj"]
+[ext_resource type="Texture2D" uid="uid://63rbhslh5ox7" path="res://Resources/Sprites/HubSprite/front wall.png" id="1_ovwdb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8s3kj"]
+size = Vector2(64, 44)
+
+[node name="FrontWall" type="StaticBody2D"]
+collision_layer = 4294967295
+collision_mask = 4294967295
+script = ExtResource("1_71ihj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_ovwdb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_8s3kj")

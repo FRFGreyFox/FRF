@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://d062elw2txycq"]
+
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_hr7d4"]
+[ext_resource type="Texture2D" uid="uid://cm4o415udlbta" path="res://Resources/Sprites/level1/tree.png" id="2_62eer"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5r1ys"]
+polygon = PackedVector2Array(17.2942, 17.2942, 17.2942, -17.2942, -17.2942, -17.2942, -17.2942, 17.2942)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifprs"]
+size = Vector2(50.875, 63.25)
+
+[node name="Tree" type="StaticBody2D"]
+script = ExtResource("1_hr7d4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_62eer")
+hframes = 5
+vframes = 2
+frame = 2
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+visible = false
+occluder = SubResource("OccluderPolygon2D_5r1ys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-39, 107)
+shape = SubResource("RectangleShape2D_ifprs")

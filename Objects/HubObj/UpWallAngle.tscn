@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnar8t1wujsa5"]
+
+[ext_resource type="Texture2D" uid="uid://80lcfmq4duo2" path="res://Resources/Sprites/HubSprite/upwallAngle.png" id="1_e4n7b"]
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_fp01n"]
+
+[node name="UpWallAngle" type="StaticBody2D"]
+collision_layer = 4294967295
+collision_mask = 4294967295
+script = ExtResource("1_fp01n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_e4n7b")

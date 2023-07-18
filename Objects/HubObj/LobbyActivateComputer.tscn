@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://vgbbf1hfh63s"]
+
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_umdqo"]
+[ext_resource type="Texture2D" uid="uid://sndt21p46v57" path="res://Resources/Sprites/HubSprite/LobbbyComputer.png" id="1_xqwuy"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hqr4k"]
+polygon = PackedVector2Array(12, -9, 12, 16, -12, 16, -12, 10, -9, 7, -9, -3, -11, -4, -11, -9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64542"]
+size = Vector2(113, 95)
+
+[node name="LobbyActivateComputer" type="StaticBody2D"]
+script = ExtResource("1_umdqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9, 9)
+scale = Vector2(5, 5)
+texture = ExtResource("1_xqwuy")
+flip_h = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+visible = false
+occluder = SubResource("OccluderPolygon2D_hqr4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, 16.5)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_64542")

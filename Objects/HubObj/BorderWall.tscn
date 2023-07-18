@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbe3qhwlup264"]
+
+[ext_resource type="Script" path="res://Objects/BaseStaticObject.gd" id="1_15tn4"]
+[ext_resource type="Texture2D" uid="uid://d0hde58bktpd4" path="res://Resources/Sprites/HubSprite/border.png" id="1_cb58f"]
+
+[node name="BorderWall" type="StaticBody2D"]
+collision_layer = 4294967295
+collision_mask = 4294967295
+script = ExtResource("1_15tn4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_cb58f")

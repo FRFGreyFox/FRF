@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbm2ock71oohd"]
+
+[ext_resource type="Script" path="res://Weapons/Bullets/BaseBullet.gd" id="1_bkrqu"]
+[ext_resource type="Texture2D" uid="uid://coaydxhynlrh2" path="res://Weapons/Bullets/KrynceBullets/tentacleBullet.png" id="2_wndiu"]
+[ext_resource type="PackedScene" uid="uid://dfivkfay22xqg" path="res://Utility/HitBox/hit_box.tscn" id="3_ynn4f"]
+
+[sub_resource type="Animation" id="Animation_esjhx"]
+resource_name = "Attack"
+length = 0.5
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_argmj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4xlyi"]
+_data = {
+"Attack": SubResource("Animation_esjhx"),
+"RESET": SubResource("Animation_argmj")
+}
+
+[node name="KrynceBulletTentacle" type="Node2D"]
+script = ExtResource("1_bkrqu")
+damage = 100
+life_time = 0.5
+speed = 0.0
+through_limit = 50
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(95, 12)
+rotation = 1.5708
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_wndiu")
+hframes = 4
+frame = 1
+
+[node name="HitBox" parent="." groups=["attack"] instance=ExtResource("3_ynn4f")]
+position = Vector2(-1, -7)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" parent="HitBox" index="0"]
+position = Vector2(96, 19)
+rotation = 1.5708
+scale = Vector2(1.1, 1.1)
+build_mode = 1
+polygon = PackedVector2Array(3, 6, -1, 15, 4, 25, -13, 36, -28, 57, -31, 80, -22, 86, 0, 84, 1, 73, 6, 65, 22, 55, 34, 42, 35, 23, 26, 7, 19.7571, 0.132843, 6, -15, -10, -32, -17, -47, -15, -64, -6, -73, 3, -75, 8, -64, 4, -41, 8, -23, 11, -33, 13, -41, 20, -59, 20, -72, 14, -83, 1, -85, -17, -82, -28, -69, -35, -59, -29, -27, -18, -13, -9, 5, -1, 15)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4xlyi")
+}
+
+[connection signal="timeout" from="LifeTimer" to="." method="_life_timer_end"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+
+[editable path="HitBox"]
