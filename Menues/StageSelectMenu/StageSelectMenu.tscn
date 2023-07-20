@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b64xu421vn7es"]
 
-[ext_resource type="Texture2D" uid="uid://vxymc8l2p7rm" path="res://Resources/Sprites/HubSprite/world map.png" id="1_xi14m"]
 [ext_resource type="Script" path="res://Menues/StageSelectMenu/Stage1Button.gd" id="2_gqgts"]
+[ext_resource type="Theme" uid="uid://1dyr5cgaw1sj" path="res://Menues/StageSelectMenu/block level style.tres" id="2_qf8e2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjhce"]
 bg_color = Color(0.34375, 0.402344, 0.183594, 1)
@@ -32,46 +32,74 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = -233.0
-offset_top = -173.0
-offset_right = 1636.0
-offset_bottom = 788.0
-texture = ExtResource("1_xi14m")
-
-[node name="Stage1Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 432.0
-offset_top = 226.0
-offset_right = 560.0
-offset_bottom = 257.0
-theme = SubResource("Theme_hokna")
-text = "Мертвая Чаща"
-script = ExtResource("2_gqgts")
-level1 = "res://Menues/StageSelectMenu/Level1Menu.tscn"
-
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 531.0
-offset_top = 480.0
-offset_right = 676.0
-offset_bottom = 511.0
-theme = SubResource("Theme_a012i")
-text = "Потеренная дюна"
-
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 411.0
-offset_top = 67.0
-offset_right = 787.0
-offset_bottom = 139.0
+offset_left = 361.0
+offset_top = 20.0
+offset_right = 737.0
+offset_bottom = 92.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "Выберите этап"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Stage1Button" to="Stage1Button" method="_on_pressed"]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.0
+offset_top = -225.0
+offset_right = 221.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.5
+offset_top = -203.5
+offset_right = 214.5
+offset_bottom = 242.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+
+[node name="Stage1Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_hokna")
+text = "Мертвая Чаща"
+script = ExtResource("2_gqgts")
+level1 = "res://Menues/StageSelectMenu/Level1Menu.tscn"
+
+[node name="Button2" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_a012i")
+text = "Потеренная дюна"
+
+[node name="Button3" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_qf8e2")
+disabled = true
+text = "Безжалостная бездна"
+
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/Stage1Button" to="Panel/ScrollContainer/VBoxContainer/Stage1Button" method="_on_pressed"]
