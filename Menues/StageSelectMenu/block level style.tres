@@ -1,7 +1,16 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://1dyr5cgaw1sj"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://1dyr5cgaw1sj"]
+
+[ext_resource type="FontFile" uid="uid://cxp4ipsh25df3" path="res://Resources/Font/QuinqueFive.ttf" id="1_pdp7h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiex5"]
+bg_color = Color(0.286275, 0, 0.0117647, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2eknv"]
 bg_color = Color(0.364706, 0.0431373, 0, 1)
+border_color = Color(1, 1, 1, 1)
+shadow_color = Color(1, 1, 1, 0.6)
 
 [resource]
+default_font = ExtResource("1_pdp7h")
+Button/styles/disabled = SubResource("StyleBoxFlat_iiex5")
 Button/styles/normal = SubResource("StyleBoxFlat_2eknv")

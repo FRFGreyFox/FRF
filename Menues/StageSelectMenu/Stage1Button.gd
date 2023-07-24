@@ -11,7 +11,5 @@ func _ready():
 func _process(delta):
 	pass
 
-
-func _on_pressed():
-	SceneTransition.change_scene()
+func _on_button_pressed():
 	get_tree().change_scene_to_file(level1)

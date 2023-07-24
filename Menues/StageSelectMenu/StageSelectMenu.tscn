@@ -1,7 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://b64xu421vn7es"]
+[gd_scene load_steps=18 format=3 uid="uid://b64xu421vn7es"]
 
 [ext_resource type="Script" path="res://Menues/StageSelectMenu/Stage1Button.gd" id="2_gqgts"]
 [ext_resource type="Theme" uid="uid://1dyr5cgaw1sj" path="res://Menues/StageSelectMenu/block level style.tres" id="2_qf8e2"]
+[ext_resource type="FontFile" uid="uid://cxp4ipsh25df3" path="res://Resources/Font/QuinqueFive.ttf" id="3_tnd5m"]
+[ext_resource type="Theme" uid="uid://bfq273o0wmbao" path="res://Menues/StageSelectMenu/StageSelectButton.tres" id="4_khime"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f8ni"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_cmlm4"]
+Panel/styles/panel = SubResource("StyleBoxFlat_1f8ni")
+
+[sub_resource type="Theme" id="Theme_bejgl"]
+default_base_scale = 2.0
+default_font = ExtResource("3_tnd5m")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjhce"]
 bg_color = Color(0.34375, 0.402344, 0.183594, 1)
@@ -27,6 +48,24 @@ shadow_offset = Vector2(0.6, 2.5)
 [sub_resource type="Theme" id="Theme_a012i"]
 Button/styles/normal = SubResource("StyleBoxFlat_g5jpq")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6m6m"]
+bg_color = Color(0.109804, 0.254902, 0.14902, 1)
+
+[sub_resource type="Theme" id="Theme_xetyi"]
+Panel/styles/panel = SubResource("StyleBoxFlat_h6m6m")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbmg1"]
+bg_color = Color(0.133333, 0.298039, 0.176471, 1)
+
+[sub_resource type="Theme" id="Theme_uyti8"]
+default_font = ExtResource("3_tnd5m")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxued"]
+bg_color = Color(0.313726, 0.254902, 0.0313726, 1)
+
+[sub_resource type="Theme" id="Theme_d5ptk"]
+default_font_size = 30
+
 [node name="StageSelectMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -39,18 +78,33 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Panel3" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 361.0
-offset_top = 20.0
-offset_right = 737.0
-offset_bottom = 92.0
+offset_left = 28.0
+offset_top = 19.0
+offset_right = 1089.0
+offset_bottom = 625.0
+theme = SubResource("Theme_cmlm4")
+
+[node name="Panel" type="Panel" parent="Panel3"]
+layout_mode = 0
+offset_right = 1061.0
+offset_bottom = 63.0
+
+[node name="Label" type="Label" parent="Panel3/Panel"]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 14.0
+offset_right = 852.0
+offset_bottom = 72.0
+theme = SubResource("Theme_bejgl")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 text = "Выберите этап"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -102,4 +156,97 @@ theme = ExtResource("2_qf8e2")
 disabled = true
 text = "Безжалостная бездна"
 
-[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/Stage1Button" to="Panel/ScrollContainer/VBoxContainer/Stage1Button" method="_on_pressed"]
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 242.0
+offset_right = 543.0
+offset_bottom = 503.0
+theme = SubResource("Theme_xetyi")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lbmg1")
+
+[node name="Panel2" type="Panel" parent="Panel2"]
+layout_mode = 0
+offset_top = -55.0
+offset_right = 449.0
+
+[node name="Button" type="Button" parent="Panel2/Panel2"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 452.0
+offset_bottom = 59.0
+theme = ExtResource("4_khime")
+text = "Мертвая чаща"
+
+[node name="Label" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 71.0
+offset_right = 437.0
+offset_bottom = 137.0
+theme = SubResource("Theme_uyti8")
+text = "Пример текста заглушка
+Уровень мира I
+Уровень сложности 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel4" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 186.0
+offset_right = 1025.0
+offset_bottom = 503.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qxued")
+
+[node name="Panel2" type="Panel" parent="Panel4"]
+layout_mode = 0
+offset_right = 449.0
+offset_bottom = 55.0
+
+[node name="Label" type="Label" parent="Panel4/Panel2"]
+layout_mode = 0
+offset_left = 6.0
+offset_right = 443.0
+offset_bottom = 53.0
+theme = ExtResource("4_khime")
+text = "Заброшенная дюна"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Panel4"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 142.0
+offset_right = 437.0
+offset_bottom = 208.0
+theme = SubResource("Theme_uyti8")
+text = "Пример текста заглушка
+Уровень мира II
+Уровень сложности 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1044.0
+offset_top = 339.0
+offset_right = 1088.0
+offset_bottom = 389.0
+theme = SubResource("Theme_d5ptk")
+theme_override_fonts/font = ExtResource("3_tnd5m")
+text = ">"
+flat = true
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 322.0
+offset_right = 75.0
+offset_bottom = 372.0
+theme = SubResource("Theme_d5ptk")
+theme_override_fonts/font = ExtResource("3_tnd5m")
+text = "<"
+flat = true
+
+[connection signal="pressed" from="Panel2/Panel2/Button" to="Panel/ScrollContainer/VBoxContainer/Stage1Button" method="_on_button_pressed"]

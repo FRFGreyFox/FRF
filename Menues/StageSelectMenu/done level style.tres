@@ -1,7 +1,10 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dlmpbiyil1d8p"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dlmpbiyil1d8p"]
+
+[ext_resource type="FontFile" uid="uid://cxp4ipsh25df3" path="res://Resources/Font/QuinqueFive.ttf" id="1_5q6pm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5afkt"]
 bg_color = Color(0.294118, 0.705882, 0.231373, 1)
 
 [resource]
+default_font = ExtResource("1_5q6pm")
 Button/styles/normal = SubResource("StyleBoxFlat_5afkt")

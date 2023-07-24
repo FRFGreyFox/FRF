@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bfq273o0wmbao"]
+
+[ext_resource type="FontFile" uid="uid://cxp4ipsh25df3" path="res://Resources/Font/QuinqueFive.ttf" id="1_0jkk1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ga40x"]
+bg_color = Color(0.109375, 0.253906, 0.148438, 1)
+
+[resource]
+default_font = ExtResource("1_0jkk1")
+Button/styles/normal = SubResource("StyleBoxFlat_ga40x")
